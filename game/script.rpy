@@ -82,25 +82,66 @@ label start:
     n "La llamada termina"
     n "Dejas el teléfono en la encimera, te preparas un café y te sientas delante del ordenador: efectivamente, ahí estaba el mensaje."
     n "Lo abres y encuentras cinco fichas, los cuatro sospechosos y la víctima, además de la ubicación de la escena del crimen."
+
     
     menu fichas:
         "Joana":
             n "lorem ipsum"
             jump fichas
+
         "Rachel":
             n "lorem ipsum"
             jump fichas
+
         "Eric":
             n "lorem ipsum"
             jump fichas
+
         "VICTIMA":
             n "lorem ipsum"
             jump fichas
+
         "PORRETA":
             n "lorem ipsum"
             jump fichas
+
+        "Viajar a la escena del crimen":
+            n "lorem ipsum definitivo"
+            jump escenaDelCrimen
+    
+    menu escenaDelCrimen:
+        "Interrogar a Joana":
+            n "lorem ipsum"
+            jump JoanaInt
+
+        "Interrogar a Rachel":
+            n "lorem ipsum"
+            jump fichas
+
+        "Interrogar a Eric":
+            n "lorem ipsum"
+            jump fichas
+
+        "Interrogar a PORRETA":
+            n "lorem ipsum"
+            jump fichas
+
         "Viajar a la escena del crimen":
             n "lorem ipsum definitivo"
 
+    menu JoanaInt:
+        d "Buenos días, Joana. "
+        "¿Dónde estabas tú la noche del asesinato?":
+            j "Durmiendo"
+        "¿Dónde estabas tú la noche del asesinato?":
+            j "Durmiendo"
+        "¿Dónde estabas tú la noche del asesinato?":
+            j "Durmiendo"
+        "¿Dónde estabas tú la noche del asesinato?":
+            j "Durmiendo"
+        "¿Dónde estabas tú la noche del asesinato?":
+            j "Durmiendo"
+        "Terminar":
+            jump escenaDelCrimen
 
     return
