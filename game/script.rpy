@@ -258,8 +258,6 @@ label CarlosInt:
                 carlosBranch2  = False
             jump CarlosIntMenu
 
-
-
         "¿Sabes si alguien se llevaba mal con Lucas?" if carlosBranch3 == True:
             c "¿Te refieres a que si sé quiénl o ha podido matar?"
             c "Pues no, no lo sé. Lucas se llevaba bien con todos."
@@ -275,9 +273,7 @@ label CarlosInt:
 
         "Muchas gracias. Con esto es suficiente.":
             jump escenaDelCrimen
-    
-
-
+     
 # ----------------- ----- ------ -----------------
 
 # ----------------- Inte. Eric -----------------
@@ -302,21 +298,113 @@ menu EricIntMenu:
 
 # ----------------- Inte. Raquel -----------------
 
+define raquelBranch1 = True
+define raquelBranch2 = True
+define raquelBranch3 = True
+
 label RaquelInt:
-menu RaquelIntMenu:
-    d "Buenos días, Joana. "
-    "¿Dónde estabas tú la noche del asesinato?":
-        j "Durmiendo"
-    "¿Dónde estabas tú la noche del asesinato?":
-        j "Durmiendo"
-    "¿Dónde estabas tú la noche del asesinato?":
-        j "Durmiendo"
-    "¿Dónde estabas tú la noche del asesinato?":
-        j "Durmiendo"
-    "¿Dónde estabas tú la noche del asesinato?":
-        j "Durmiendo"
-    "Terminar":
-        jump escenaDelCrimen
+    r "Sniff sniff"
+
+    d "¿Necesitas un pañuelo?"
+
+    r "No, no hace falta... Tengo pro aquí uno. *llora* Lo siento..."
+
+    d "No te preocupes."
+
+    r "Es que... Esta mañana... yo... *llora* Nunca volveré a verle... *llora* está... se ha ido..."
+
+    d "Mira... sé que esto es complicado, pero necesito que hacerte unas preguntas... Sé que no te apetece recordarlo todo, pero debes hacerlo por Lucas. Piensa que a él le gustaría que averiguásemos qué pasó realmente."
+
+    r "Tiene razón..."
+
+    d "No hace falta que me trates de usted, somos un equipo. Solo quiero saber la verdad y suponogo que tú también, ¿no?"
+
+    r "Sí. Sí quiero. Lucaas no se merece esto. Hay que averiguar qué ocurrió, porque... cómo alguien le... haya matado... *llora*"
+
+    d "Tranquila. Para eso estoy aquí. Para que se haga justicia. Si alguien hizo algo, lo descubriremos y pagará, ¿vale?"
+
+    r "Sí... empecemos..."
+
+    d "Perfecto"
+
+    menu RaquelIntMenu: 
+        "¿Qué ocurrió anoche?" if raquelBranch1:
+            r "Vale... a ver que piense... Estuvimos mucho rato charlando en la mesa que hay en la entrada de la casa, en el patio."
+            r "Luego se nos ocurrió juegar al juego de la botella y para ello nos fuimos al salón de la casa, allí gira bien la botella en el suelo."
+            r "Si no hubiésemos jugado a ese juego..."
+
+            d "Lo estás haciendo muy bien. Continúa, por favor."
+
+            r "No sé si sabes qué juego es: se gira un aboterlla y a la persona a la que apunte le haces hacer una cosa, bueno, hay muchas versiones del juego, pero nosotros jugamos a verdad o reto."
+
+            d "Entiendo."
+
+            r "Eric giró la botella, que apuntó a Joana y ésta eligió reto."
+            r "Y el tonto de Eirc le dijo que le diese un beso a Carlos, y Joana se lo dio."
+            r "Fue un pico, nada más."
+
+            menu RaquelQ1:
+                "¿Cómo reaccionó Lucas?":
+                    r "No le gustó. Obviamente, sabía que era un juego estúpido y que no significaba nada... *baja la mirada*"
+
+                    d "¿Qué ocurre?"
+
+                    r "Carlos y Joana estuvieron saliendo hace unos años. Al final se dieron cuenta de que no funcionaba y que sería mejor quedar como amigos. Pero Lucas seguía sin aceptar eso."
+                    r "A día de hoy sigue... seguía... manteniendo un cierto recelo hacia Carlos."
+                    r "Aún así, eran muy buenos amigos y sabía que Joana ya no sentía nada por él." 
+
+
+                "¿Por qué Eric le pondría ese reto a Joana?":
+                    r "Así es Eric. Yo creo que a veces no sabe ni lo que hace."
+                    r "Seguramente ya ni se acordaba de que hubo algo entre Carlos y Joana y tan solo quisiera que Luis se picase un poco."
+
+                "¿Qué le pareció ese reto a Joana? ¿Se quejó o algo?":
+                    r "No. Se quedó seria, se levantó y lo cumplió. Después se volvió a su sitio, seguramente sin darle demasiada importancia, como hace con todo en esta vida."
+            
+            d "Entiendo, continúa"
+
+            r "Pasó un rato y giramos la botella un par de veces más... hasta que Lucas se levantó y nos dijo que se iba a tomar el aire."
+
+            d "¿Y seguisteis jugando todos?"
+
+            r "Sí, pero al rato se levantó Joana y fue tras él."
+            r "Yo creo que fue a asegurarse de que Lucas estaba bien."
+            r "Tardaron bastante en volver y se escucharon gritos de una discusión."
+            r "Al rato entró Joana a la habitación y se sentó de nuevo en su sitio con el resto. Parecía furiosa."
+            r "Ella es del tipo de persona que no muestra mucho sus emociones, pero a pesar de todo eso se notaba que algo no había ido bien."
+            r "Al resto nos dio miedo sacar el tema,p or lo que hicimos como si nada hubiese pasado. Charlamos un rato y seguimos jugando"
+
+            d "¿Y qué pasó después?"
+
+            r "Estuvimos algo de tiempo jugando y pasando el rato hasta que entró Lucas dicineod que se iba a dormir. Le dimos las buenas noches y subió."
+            r "Parecía que estaba bien, pero algo cansado."
+
+            d "¿Actuó de manera extraña?"
+
+            r "No, en absoluto. Estaba tranquilo."
+
+            d "¿Ocurrió algo más después de eso?"
+
+            r "No, nos quedamos media horilla más... después cada uno subió a su cuarto a dormir. "
+            
+            python:
+                raquelBranch1 = False
+            jump RaquelIntMenu
+
+        "Entiendo que fuiste tú quién encontró primero el cuerpo" if raquelBranch2:
+            python:
+                raquelBranch2 = False
+            jump RaquelIntMenu
+
+        "¿Cómo era Lucas?" if raquelBranch3:
+            python:
+                raquelBranch3 = False
+            jump RaquelIntMenu
+
+        "Muchas gracias por todo.":
+            jump escenaDelCrimen
+
+
 
 # ----------------- ----- ------ -----------------
 
