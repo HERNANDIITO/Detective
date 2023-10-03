@@ -392,11 +392,74 @@ label RaquelInt:
             jump RaquelIntMenu
 
         "Entiendo que fuiste tú quién encontró primero el cuerpo" if raquelBranch2:
-            python:
+            r "Sí..."
+
+            d "¿Ocurrió algo antes de que lo encontrases?"
+
+            r "Por la noche... me despertaron... al principio eran murullos..."
+            r "Pero luego pude distinguir las voces..."
+
+            d "¿Qué ocurre, Raquel? ¿De quién eran las voces?"
+
+            r "De Carlos y Lucas... Estaban en la piscina, parecía que estaban discutiendo..."
+            r "Carlos parecía muy alterado..."
+            r "También escuché agua... Creo que alguien se cayó a la piscina... *llora*"
+
+            d "¿Crees que Carlos podría hacer algo así?"
+
+            r "No lo se..."
+            r "Él... él nunca haría nada así..."
+            r "Es verdad que a veces es algo... irascible... y se enfada y grita mucho..."
+            r "Pero nos quiere a todos... quería mucho a Lucas..."
+
+            d "Tranquilizate. Respira..."
+
+            r "Lo siento"
+
+            d "No pasa nada. Ahora procede. ¿Qué oíste?"
+
+            r "A Carlos y Lucas. Estaban en la piscina, no se qué decían pero por el tono de voz sé que Carlos estaba enfadado. Y escuché agua y más gritos."
+
+            d "Está bien, es suficiente. Cambiemnos de tema."
+
+            menu RaquelQ2:
+                "¿Hiciste algo? ¿Te acercaste a ellos?":
+                    r "No... me seguí durmiendo... En su momento no le di importancia, ¿sabe?"
+                    r "Pensé que simplemente estarían jugando..."
+
+                "¿Esto se lo has contado a alguien más?":
+                    r "No... Nadie más lo sabe..."
+                    r "O por lo menos yo no lo he contado..."
+
+            d "¿Sobre qué hora fue esto?"
+
+            r "No lo recuerdo... Sería sobre la una, una y pico..."
+
+            d "Muy bien."
+
+            python: 
                 raquelBranch2 = False
             jump RaquelIntMenu
 
         "¿Cómo era Lucas?" if raquelBranch3:
+            r "Muy buena gente."
+            r "Se llevaba bien con todos. Era un chico educado..."
+            r "Todavía no me creo que le haya pasado esto a él..."
+            python:
+                raquelBranch3 = False
+            jump RaquelIntMenu
+
+        "¿Ocurrió algo esta mañana?" if raquelBranch4:
+            r "Fui a la cocina a por algo para comer... Saqué algo de la despensa, me preparé un café y cuando fui a sentarme en la mesa, vi un cuerpo en flotando boca abajo en la piscina..."
+            r "Enseguida lo reconocí... *llora*"
+
+            d "Me estás ayudando mucho, continúa, por favor."
+
+            r "Abrí el ventanal y me acerqué... estaba pálido..."
+
+            d "Y fue ahí cuándo gritaste, ¿no?"
+
+            r "Sí..." 
             python:
                 raquelBranch3 = False
             jump RaquelIntMenu
@@ -405,7 +468,7 @@ label RaquelInt:
             jump escenaDelCrimen
 
 
-
+ 
 # ----------------- ----- ------ -----------------
 
 # ----------------- Inte. Joana -----------------
