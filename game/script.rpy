@@ -16,14 +16,19 @@ define carlosBranch0 = True
 define carlosBranch1 = True
 define carlosBranch2 = True
 define carlosBranch3 = True
+define carlosBranch4 = False
+define carlosBranch5 = False
+define carlosBranch6 = False
+
+define carlosBranch5AlreadyFound = False
 
 # --- Eric ---
 
 define ericBranch0 = True
 define ericBranch1 = True
-define ericBranch2 = True
-define ericBranch3 = True
-define ericBranch4 = True
+define ericBranch2 = False
+define ericBranch3 = False
+define ericBranch4 = False
 
 # --- Raquel ---
 
@@ -226,7 +231,7 @@ label CarlosInt:
             c "Ahora, ¿su relación? Casi no se nada de ella. Lucas apenas se abría y no me creo nada de lo que dice Joana"
             c "Creo que miente más que otra cosa" 
             
-            menu CarlosQ1:
+            menu:
                 "Conoces demasiado bien la vida de Joana...":
                     c "Nos llevábamos bien. Llegamos a estar bastante unidos"
 
@@ -313,6 +318,142 @@ label CarlosInt:
                 carlosBranch3  = False
             jump CarlosIntMenu
 
+        "¿Por qué se molestó Lucas mientras jugábais?" if carlosBranch4:
+            c "Nada, una tontería. Como bien has dicho: sólo estábamos jugando."
+
+            d "¿Seguro que no hubo un beso involucrado?"
+            d "¿Uno que pudiese molestar a nuestra víctima?"
+
+            c "¿Un beso?"
+            c "Ojalá. Ni si quiera se le puede llamar un beso a eso."
+            c "Un reto que puso el subnormal de Eric"
+            c "Un reto que seguramente haya olvidado porque seguro que va completamente fumado."
+            python:
+                carlosBranch4  = False
+            jump CarlosIntMenu
+
+        "¿Llegaste a tener algún vínculo romántico con Joana?" if carlosBranch5:
+            c "¿Quién te ha dicho eso?"
+            c "Vaya panda de mentirosos que tengo por amigos, joder."
+
+            d "¿Entonces lo niegas?"
+
+            c "Claro que sí. Jamás hubo ni habrá nada entra esa loca y yo."
+            python:
+                carlosBranch5  = False
+            jump CarlosIntMenu
+
+        "Me he enterado de que Joana y tú estuvisteis saliendo. ¿Por qué has mentido?" if carlosBranch5:
+            c "Fue hace unos años. Nunca funcionó."
+            python:
+                carlosBranch5  = False
+            jump CarlosIntMenu
+
+        "¿Estuviste en la piscina por la noche?" if carlosBranch6:
+            c "¿En la piscina?"
+            c "Pero si yo me fui a dormir a la misma hora que todos."
+            c "¿Por qué me quedaría yo solo en la piscina?"
+            c "¿Crees que soy yo el asesino?"
+            c "¿Crees que asesinaría yo a alguien?"
+            c "¿A mi mejor amigo?"
+
+            d "Alguien te escuchó hablar con Lucas por la noche."
+            d "En la piscina."
+
+            c "Joder."
+
+            d "Habla."
+
+            c "Me desperté en mitad de la noche..."
+            c "No me podía dormir y me cansé de dar vueltas en la cama, por lo que salí al porche a tomar el aire."
+            c "Y al rato apareció Lucas."
+
+            menu:
+                "Por favor, continúa.":
+                    c "Sí... voy..."
+
+                "Termina la historia. Dudo que quedase ahí":
+                    c "Voy, voy... Joder, cómo estamos..."
+            
+            c "Pues le pregunté si estaba todo bien."
+            c "Me comentó que había discutido con su querida novia y que además no podía dormir por lo que había salido a dar un paseo."
+            c "Yo, como buen mejor amigo, me ofercí a acompañarle."
+
+            d "¿Sobre qué hora ocurrió esto?"
+
+            c "Sobre la una y media... ¿Dos quizás?"
+
+            d "Está bien, continúa."
+
+            c "Dimos una vuelta a la parcela, estuvimos hablando simplemente. Nada relevante, hablar por hablar."
+            c "A la vuelta nos sentamos en el borde de la piscina a seguir hablando."
+
+            d "¿Ocurrió algo en la piscina?"
+
+            c "Pfff..."
+            c "Nos enfadamos. Mejor dicho: se enfadó."
+            c "Y eso me enfadó a mí."
+            c "¿Por qué le cuesta tanto escuchar al chaval?"
+            c "A veces me saca de quicio."
+
+            d "Sí, pero qué pasó."
+
+            c "Lo empujé a la piscina."
+
+            d "Ya veo..."
+
+            c "No. No murió ahí. Salió de la piscina, yo lo vi."
+            c "Eric también."
+
+            d "¿Eric?"
+
+            c "Sí. Llegó justo cuando lo empujé a la piscina y lo ayudó a secarse y después se fueron a no sé dónde."
+
+            d "¿Y tú qué hiciste después?"
+
+            c "Me fui a dar un paseo."
+            c "Estaba cabreadísimo, pero cuando volví se me había pasado y me fui directo a la cama."
+            c "Me dormí rapidísimo."
+            c "Enfadarse cansa."
+
+            d "¿Cuándo llegaste a casa después de tu paseo?"
+
+            c "A las 4:03 AM. Esto sí que lo se bien. Lo vi en el despertador justo antes de dormirme."
+            python:
+                carlosBranch6  = False
+                ericBranch2 = True
+            jump CarlosIntMenu
+
+        "¿Viste a Lucas durante la noche?" if carlosBranch6:
+            c "¿Por qué me preguntas esto?"
+            c "¿En serio crees que he sido yo?"
+            c "¿Su jodido mejor amigo?"
+            c "Pff... llévame preso si tan seguro estás."
+
+            d "Tengo información que te hace el principal sospechoso ahora mismo."
+
+            c "Pues sí. Sí que lo vi."
+            c "No podía dormir anoche, por lo que salí a tomar el aire y al rato apareció él."
+
+            d "¿Sobre qué hora fue esto?"
+
+            c "Yo qué sé."
+            c "Lo único de lo que estoy seguro es de que yo ya estaba en la cama a las cuatro"
+
+            d "¿Puedo saber de qué hablásteis?"
+            
+            c "De la vida."
+            c "Nos pusimos al día. Hacía bastante que no nos veíamos."
+
+            d "¿Y en ningún momento pasásteis por la piscina?"
+
+            c "Qué va. Hacía frío a esas horas."
+            c "No se cómo acabó muerto allí. Pero por mi culpa no fue."
+            python:
+                carlosBranch6 = False
+                ericBranch3 = True
+            jump CarlosIntMenu
+            
         "Muchas gracias. Con esto es suficiente.":
             jump escenaDelCrimen
      
@@ -333,7 +474,7 @@ label EricInt:
         d "Veo que esto va a ser difícil..."
         
         python:
-            raquelBranch0 = False
+            ericBranch0 = False
 
     menu EricIntMenu:
         "¿Eric?" if ericBranch1:
@@ -343,7 +484,7 @@ label EricInt:
                 ericBranch1 = False
             jump EricIntMenu
 
-        "¿Estás mejor (C-A)?" if ericBranch2:
+        "¿Estás mejor?" if ericBranch2:
             e "Sí... Más o menos..."
 
             d "¿Estuviste anoche en la piscina?"
@@ -381,13 +522,36 @@ label EricInt:
                 "Y qué pasó después":
                     e "Aaargh... no me acuerdo..."
 
-            n "Aquí harías la llamada a la agencia para que te confirmen si Lucas consumió drogas antes de morir."
+            d "Eric, dame un segundo."
+
+            e "Si..."
+
+            n "Haces una llamada a la Agencia"
+
+            a "¿Sí?"
+
+            d "Aarón, soy yo, [nombre]."
+            d "Necesito la información de la autopsia."
+
+            a "Tenemos pocos datos, de momento."
+            a "Parece ser que tiene un par de costillas rotas y que terminó de morir ahogado."
+            a "No se cómo acabaría así el chiquillo pero tuvo que sufrir cosa mala."
+
+            d "¿Se han encontrado restos de estupefacientes en la sangre?"
+            d "Marihuana, concretamente."
+
+            a "Justo. Perdona. No se cómo he pasado eso por alto."
+
+            d "Perfecto. Muchas gracias."
+
+            n "Terminas la llamada."
 
             python:
                 ericBranch2 = False
+                ericBranch4 = True
             jump EricIntMenu
         
-        "¿Estás mejor (C-B)?" if ericBranch3:
+        "¿Estás mejor?" if ericBranch3:
             e "Sí... Más o menos..."
 
             d "¿Ocurrió algo anoche?"
@@ -430,7 +594,7 @@ label EricInt:
                 ericBranch3 = False
             jump EricIntMenu
 
-        "¿Dónde estuvisteis Lucas y tú fumando (E-A)?" if ericBranch4:
+        "¿Dónde estuvisteis Lucas y tú fumando?" if ericBranch4:
             e "Hmmm..."
             e "Aaargh..."
             e "A la azotea, creo..."
@@ -523,6 +687,13 @@ label RaquelInt:
                     r "A día de hoy sigue... seguía... manteniendo un cierto recelo hacia Carlos."
                     r "Aún así, eran muy buenos amigos y sabía que Joana ya no sentía nada por él." 
 
+                    python:
+                        if carlosBranch5AlreadyFound == False:
+                            carlosBranch5 = True
+                            carlosBranch5AlreadyFound = True
+
+                        joanaBranch5 = True
+
 
                 "¿Por qué Eric le pondría ese reto a Joana?":
                     r "Así es Eric. Yo creo que a veces no sabe ni lo que hace."
@@ -559,6 +730,8 @@ label RaquelInt:
             
             python:
                 raquelBranch1 = False
+                carlosBranch4 = True
+                raquelBranch4 = True
             jump RaquelIntMenu
 
         "Entiendo que fuiste tú quién encontró primero el cuerpo" if raquelBranch2:
@@ -607,6 +780,8 @@ label RaquelInt:
 
             python: 
                 raquelBranch2 = False
+                carlosBranch6 = True
+                joanaBranch6 = True
             jump RaquelIntMenu
 
         "¿Cómo era Lucas?" if raquelBranch3:
@@ -763,6 +938,9 @@ label JoanaInt:
             j "Era... bastante dramático"
 
             python:
+                if carlosBranch5AlreadyFound == False:
+                    carlosBranch5 = True
+                    carlosBranch5AlreadyFound = True
                 joanaBranch5 = False
             jump JoanaIntMenu
 
