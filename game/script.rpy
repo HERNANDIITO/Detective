@@ -313,7 +313,8 @@ label EricInt:
 
     menu EricIntMenu:
         "¿Eric?" if ericBranch1:
-            e "Aargh..."
+            e "Aargh... "
+            e "Déjame en paz..."
             python:
                 ericBranch1 = False
             jump EricIntMenu
@@ -365,14 +366,16 @@ label EricInt:
         "¿Estás mejor (C-B)?" if ericBranch3:
             e "Sí... Más o menos..."
 
-            d "¿Estuviste anoche en la piscina?"
+            d "¿Qué estuviste haciendo anoche?"
 
-            e "Hmm... sí... estaban Carlos y Lucas peleando..."
+            e "No lo recuerdo... pero se escuchaba a Carlos y Lucas gritarse barbaridades en la piscina." 
+            e "Para variar... hehehe"
 
             d "¿Qué ocurrió?"
 
             e "Hmm..."
-            e "No sé dónde fueron... pero Carlos me pilló asaltando la bodega en la madrugada... hehehe..."
+            e "No sé dónde fueron... Me pareció ver entrar a Carlos a casa mientras yo asaltaba la bodega... hehehe..."
+            e "Menos mal que me dio tiempo a esconderme, sino me hubiese llevado a rastras a mi cuarto... hehehe..."
 
             python:
                 ericBranch3 = False
