@@ -10,6 +10,39 @@ define e = Character("Eric")
 
 # Branches
 
+# --- Carlos ---
+
+define carlosBranch0 = True
+define carlosBranch1 = True
+define carlosBranch2 = True
+define carlosBranch3 = True
+
+# --- Eric ---
+
+define ericBranch0 = True
+define ericBranch1 = True
+define ericBranch2 = True
+define ericBranch3 = True
+define ericBranch4 = True
+
+# --- Raquel ---
+
+define raquelBranch0 = True
+define raquelBranch1 = True
+define raquelBranch2 = True
+define raquelBranch3 = True
+define raquelBranch4 = True
+
+# --- Joana ---
+
+define joanaBranch0 = True
+define joanaBranch1 = True
+define joanaBranch2 = True
+define joanaBranch3 = True
+define joanaBranch4 = False
+define joanaBranch5 = False
+define joanaBranch6 = False
+
 # Animaciones
 
 transform toLeft:
@@ -159,12 +192,6 @@ menu acusaciones:
 
 # ----------------- Inte. Carlos -----------------
 
-
-define carlosBranch0 = True
-define carlosBranch1 = True
-define carlosBranch2 = True
-define carlosBranch3 = True
-
 label CarlosInt:
 
     if (carlosBranch0):
@@ -186,7 +213,7 @@ label CarlosInt:
 
     menu CarlosIntMenu:
     
-        "¿Cómo era tu relación con Lucas? ¿Os llevábais bien?" if carlosBranch1 == True:
+        "¿Cómo era tu relación con Lucas? ¿Os llevábais bien?" if carlosBranch1:
             c "Era un buen amigo. Se llevaba bien con todos."
             c "Una pena su pérdida."
 
@@ -237,7 +264,7 @@ label CarlosInt:
                 carlosBranch1 = False
             jump CarlosIntMenu
 
-        "Cuéntame con todo lujo de detalles lo que ocurrió anoche." if carlosBranch2 == True:
+        "Cuéntame con todo lujo de detalles lo que ocurrió anoche." if carlosBranch2:
             c "Pues a ver..."
             c "Estábamos jugando juegos de mesa y pasando un buen rato, cuando de repente Lucas se mosqueó por una tontería. Al rato fue Joana a hablar con él."
             c "No sabemos de qué hablaron pero se les escuchó discutor."
@@ -270,7 +297,7 @@ label CarlosInt:
                 carlosBranch2  = False
             jump CarlosIntMenu
 
-        "¿Sabes si alguien se llevaba mal con Lucas?" if carlosBranch3 == True:
+        "¿Sabes si alguien se llevaba mal con Lucas?" if carlosBranch3:
             c "¿Te refieres a que si sé quiénl o ha podido matar?"
             c "Pues no, no lo sé. Lucas se llevaba bien con todos."
             c "No creo que nadie quisiera hacerle daño"
@@ -282,6 +309,9 @@ label CarlosInt:
             d "¿Tenía motivos para suicidarse?"
 
             c "Ni idea."
+            python:
+                carlosBranch3  = False
+            jump CarlosIntMenu
 
         "Muchas gracias. Con esto es suficiente.":
             jump escenaDelCrimen
@@ -289,12 +319,6 @@ label CarlosInt:
 # ----------------- ----- ------ -----------------
 
 # ----------------- Inte. Eric -----------------
-
-define ericBranch0 = True
-define ericBranch1 = True
-define ericBranch2 = True
-define ericBranch3 = True
-define ericBranch4 = True
 
 label EricInt:
     if ericBranch0:
@@ -346,7 +370,7 @@ label EricInt:
                 "Espabila, Eric, no tenemos todo el día":
                     e "Voy... voy..."
                 
-            e "Los separé... y me fui con Lucas a la azotea..."
+            e "Los separé... y me fui con Lucas... a la azotea..."
             e "Conseguí que se fumase uno, hehehe"
             e "Nunca lo había visto tan contento..."
 
@@ -355,7 +379,7 @@ label EricInt:
                     e "Hehehe... un poco solo... nada que pudiese matarlo..."
                 
                 "Y qué pasó después":
-                    e "Me dormí... hehehe..."
+                    e "Aaargh... no me acuerdo..."
 
             n "Aquí harías la llamada a la agencia para que te confirmen si Lucas consumió drogas antes de morir."
 
@@ -366,16 +390,41 @@ label EricInt:
         "¿Estás mejor (C-B)?" if ericBranch3:
             e "Sí... Más o menos..."
 
-            d "¿Qué estuviste haciendo anoche?"
+            d "¿Ocurrió algo anoche?"
 
-            e "No lo recuerdo... pero se escuchaba a Carlos y Lucas gritarse barbaridades en la piscina." 
+            e "Hmm... No lo sé... Oí a gente discutir..."
+            
+            d "¿Te acuerdas de quienes eran?"
+
+            e "Agh..."
+           
+            menu:
+                "Esto es importante, necesito detalles, por favor.":
+                    e "¿Por qué es importante...? ¿Tú quién eres...?"
+                
+                "Espabila, Eric, no tenemos todo el día":
+                    e "Voy... voy..."
+
+            e "Eran Carlos y Lucas... se estaban gritando en la piscina..."
             e "Para variar... hehehe"
 
             d "¿Qué ocurrió?"
 
-            e "Hmm..."
-            e "No sé dónde fueron... Me pareció ver entrar a Carlos a casa mientras yo asaltaba la bodega... hehehe..."
-            e "Menos mal que me dio tiempo a esconderme, sino me hubiese llevado a rastras a mi cuarto... hehehe..."
+            e "Hmm... No lo sé... No me acuerdo..."
+
+            d "¿Pasó algo más después de eso?"
+
+            e "Eh... me cogí una botella...hehehe..."
+
+            d "¿Fuiste a la cocina a por ella?"
+
+            e "Sí... ahora que lo recuerdo... ocurrió algo más..."
+
+            d "¿Qué fue?"
+
+            e "Me pareció ver entrar a Carlos... Entró a la casa... mientras yo asaltaba la bodega... hehehe..."
+            e "Me escondí... no me vió..."
+            e "Y menos mal... sino me hubiese llevado a rastras a mi cuarto... hehehe..."
 
             python:
                 ericBranch3 = False
@@ -417,12 +466,6 @@ label EricInt:
 # ----------------- ----- ---- -----------------
 
 # ----------------- Inte. Raquel -----------------
-
-define raquelBranch0 = True
-define raquelBranch1 = True
-define raquelBranch2 = True
-define raquelBranch3 = True
-define raquelBranch4 = True
 
 label RaquelInt:
 
@@ -599,14 +642,6 @@ label RaquelInt:
 # ----------------- Inte. Joana -----------------
 
 label JoanaInt:
-
-    define joanaBranch0 = True
-    define joanaBranch1 = True
-    define joanaBranch2 = True
-    define joanaBranch3 = True
-    define joanaBranch4 = False
-    define joanaBranch5 = False
-    define joanaBranch6 = False
 
     if joanaBranch0:
 
