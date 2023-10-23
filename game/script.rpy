@@ -58,6 +58,18 @@ transform toRight:
     xalign 0.5 yalign 1.0
     linear 1 xalign 1.0
 
+transform fromLeft:
+    xalign -1.0 yalign 1.0
+    linear 1 xalign 0.0
+
+transform fromBottom:
+    xalign 0.0 yalign 2.0
+    linear 1 yalign 1.0
+
+transform toBottom:
+    xalign 0.0 yalign 1.0
+    linear 1 yalign 2.0
+
 transform fadeOut:
     alpha 1.0
     linear 3 alpha 0.0
@@ -66,14 +78,16 @@ transform fadeOut:
 
 label start:
 
-    scene bg room
+    scene black
 
     n "Suena la alarma y te despiertas."
     n "Sales de entre las sábanas y te diriges al baño."
 
+    scene bg bath with dissolve
+
     n "¿Qué ves?"
 
-    show d_fem pose:
+    show d_fem flipped:
         toLeft
     show d_masc pose:
         toRight
@@ -86,6 +100,9 @@ label start:
             
         "Chica":
             hide d_masc with dissolve
+            hide d_fem with dissolve
+            show d_fem pose:
+                toRight
             python:
                 gen = "d_fem"
 
@@ -97,7 +114,14 @@ label start:
 
     define d = Character( name = "[nombre]", image = "[gen]" )
 
-    n "Terminas de lavarte la cara y procedes a desayunar, cuando de repente suena el teléfono."
+    n "Terminas de lavarte la cara y procedes a desayunar."
+
+    show bg kitchen with dissolve
+
+    show phone neutral:
+        fromBottom
+
+    n "Repentinamente suena el movil."
 
     d "¿Sí? ¿Quién es?"
 
@@ -120,29 +144,47 @@ label start:
     a "Pero bueno, hoy por ti, mañana por mí. Buena suerte."
 
     n "La llamada termina"
+    hide phone with dissolve
+
     n "Dejas el teléfono en la encimera, te preparas un café y te sientas delante del ordenador: efectivamente, ahí estaba el mensaje."
+    show bg office with dissolve
     n "Lo abres y encuentras cinco fichas, los cuatro sospechosos y la víctima, además de la ubicación de la escena del crimen."
 
     
     menu fichas:
         "Joana":
+            show file joana:
+                fromBottom
             n "lorem ipsum"
+            hide joana with dissolve
             jump fichas
 
         "Raquel":
+            show file raquel:
+                fromBottom
             n "lorem ipsum"
+            hide raquel with dissolve
             jump fichas
 
         "Eric":
+            show file eric:
+                fromBottom
             n "lorem ipsum"
+            hide eric with dissolve
             jump fichas
 
         "Carlos":
+            show file carlos:
+                fromBottom
             n "lorem ipsum"
+            hide carlos with dissolve
             jump fichas
 
         "Lucas":
+            show file lucas:
+                fromBottom
             n "lorem ipsum"
+            hide lucas with dissolve
             jump fichas
 
         "Viajar a la escena del crimen":
@@ -198,6 +240,9 @@ menu acusaciones:
 # ----------------- Inte. Carlos -----------------
 
 label CarlosInt:
+
+    show carlos neutral:
+        fromLeft
 
     if (carlosBranch0):
         d "Buenos días, Carlos."
@@ -334,6 +379,7 @@ label CarlosInt:
 
         "¿Llegaste a tener algún vínculo romántico con Joana?" if carlosBranch5:
             c "¿Quién te ha dicho eso?"
+            show carlos angry at left
             c "Vaya panda de mentirosos que tengo por amigos, joder."
 
             d "¿Entonces lo niegas?"
@@ -373,8 +419,10 @@ label CarlosInt:
                     c "Sí... voy..."
 
                 "Termina la historia. Dudo que quedase ahí":
+                    show carlos angry at left
                     c "Voy, voy... Joder, cómo estamos..."
             
+            show carlos neutral at left
             c "Pues le pregunté si estaba todo bien."
             c "Me comentó que había discutido con su querida novia y que además no podía dormir por lo que había salido a dar un paseo."
             c "Yo, como buen mejor amigo, me ofercí a acompañarle."
@@ -394,6 +442,7 @@ label CarlosInt:
             c "Nos enfadamos. Mejor dicho: se enfadó."
             c "Y eso me enfadó a mí."
             c "¿Por qué le cuesta tanto escuchar al chaval?"
+            show carlos angry at left
             c "A veces me saca de quicio."
 
             d "Sí, pero qué pasó."
@@ -404,6 +453,7 @@ label CarlosInt:
 
             c "No. No murió ahí. Salió de la piscina, yo lo vi."
             c "Eric también."
+            show carlos neutral at left
 
             d "¿Eric?"
 
@@ -428,6 +478,7 @@ label CarlosInt:
             c "¿Por qué me preguntas esto?"
             c "¿En serio crees que he sido yo?"
             c "¿Su jodido mejor amigo?"
+            show carlos angry at left
             c "Pff... llévame preso si tan seguro estás."
 
             d "Tengo información que te hace el principal sospechoso ahora mismo."
@@ -439,6 +490,7 @@ label CarlosInt:
 
             c "Yo qué sé."
             c "Lo único de lo que estoy seguro es de que yo ya estaba en la cama a las cuatro"
+            show carlos neutral at left
 
             d "¿Puedo saber de qué hablásteis?"
             
@@ -455,6 +507,7 @@ label CarlosInt:
             jump CarlosIntMenu
             
         "Muchas gracias. Con esto es suficiente.":
+            hide carlos with dissolve
             jump escenaDelCrimen
      
 # ----------------- ----- ------ -----------------
@@ -462,6 +515,10 @@ label CarlosInt:
 # ----------------- Inte. Eric -----------------
 
 label EricInt:
+
+    show eric neutral:
+        fromLeft
+
     if ericBranch0:
         d "Buenas días. ¿Eric verdad?"
 
@@ -625,6 +682,7 @@ label EricInt:
             jump EricIntMenu
 
         "Terminar":
+            hide eric with dissolve
             jump escenaDelCrimen
 
 # ----------------- ----- ---- -----------------
@@ -633,16 +691,20 @@ label EricInt:
 
 label RaquelInt:
 
+    show raquel neutral:
+        fromLeft
+
     if ( raquelBranch0 ):
         r "Sniff sniff"
 
         d "¿Necesitas un pañuelo?"
 
-        r "No, no hace falta... Tengo pro aquí uno. *llora* Lo siento..."
+        r "No, no hace falta... Tengo pro aquí uno. Lo siento..."
 
         d "No te preocupes."
 
-        r "Es que... Esta mañana... yo... *llora* Nunca volveré a verle... *llora* está... se ha ido..."
+        show raquel sad
+        r "Es que... Esta mañana... yo... Nunca volveré a verle... está... se ha ido..."
 
         d "Mira... sé que esto es complicado, pero necesito que hacerte unas preguntas... Sé que no te apetece recordarlo todo, pero debes hacerlo por Lucas. Piensa que a él le gustaría que averiguásemos qué pasó realmente."
 
@@ -650,7 +712,8 @@ label RaquelInt:
 
         d "No hace falta que me trates de usted, somos un equipo. Solo quiero saber la verdad y suponogo que tú también, ¿no?"
 
-        r "Sí. Sí quiero. Lucaas no se merece esto. Hay que averiguar qué ocurrió, porque... cómo alguien le... haya matado... *llora*"
+        r "Sí. Sí quiero. Lucaas no se merece esto. Hay que averiguar qué ocurrió, porque... cómo alguien le... haya matado..."
+        show raquel neutral
 
         d "Tranquila. Para eso estoy aquí. Para que se haga justicia. Si alguien hizo algo, lo descubriremos y pagará, ¿vale?"
 
@@ -667,7 +730,11 @@ label RaquelInt:
             r "Luego se nos ocurrió juegar al juego de la botella y para ello nos fuimos al salón de la casa, allí gira bien la botella en el suelo."
             r "Si no hubiésemos jugado a ese juego..."
 
+            show raquel sad
+
             d "Lo estás haciendo muy bien. Continúa, por favor."
+
+            show raquel neutral
 
             r "No sé si sabes qué juego es: se gira un aboterlla y a la persona a la que apunte le haces hacer una cosa, bueno, hay muchas versiones del juego, pero nosotros jugamos a verdad o reto."
 
@@ -679,13 +746,15 @@ label RaquelInt:
 
             menu RaquelQ1:
                 "¿Cómo reaccionó Lucas?":
-                    r "No le gustó. Obviamente, sabía que era un juego estúpido y que no significaba nada... *baja la mirada*"
+                    r "No le gustó. Obviamente, sabía que era un juego estúpido y que no significaba nada..."
+                    show raquel sad
 
                     d "¿Qué ocurre?"
 
                     r "Carlos y Joana estuvieron saliendo hace unos años. Al final se dieron cuenta de que no funcionaba y que sería mejor quedar como amigos. Pero Lucas seguía sin aceptar eso."
                     r "A día de hoy sigue... seguía... manteniendo un cierto recelo hacia Carlos."
-                    r "Aún así, eran muy buenos amigos y sabía que Joana ya no sentía nada por él." 
+                    r "Aún así, eran muy buenos amigos y sabía que Joana ya no sentía nada por él."
+                    show raquel neutral
 
                     python:
                         if carlosBranch5AlreadyFound == False:
@@ -711,12 +780,15 @@ label RaquelInt:
             r "Sí, pero al rato se levantó Joana y fue tras él."
             r "Yo creo que fue a asegurarse de que Lucas estaba bien."
             r "Tardaron bastante en volver y se escucharon gritos de una discusión."
+            show raquel sad
             r "Al rato entró Joana a la habitación y se sentó de nuevo en su sitio con el resto. Parecía furiosa."
             r "Ella es del tipo de persona que no muestra mucho sus emociones, pero a pesar de todo eso se notaba que algo no había ido bien."
             r "Al resto nos dio miedo sacar el tema,p or lo que hicimos como si nada hubiese pasado. Charlamos un rato y seguimos jugando"
 
             d "¿Y qué pasó después?"
 
+            show raquel netral
+ 
             r "Estuvimos algo de tiempo jugando y pasando el rato hasta que entró Lucas dicineod que se iba a dormir. Le dimos las buenas noches y subió."
             r "Parecía que estaba bien, pero algo cansado."
 
@@ -746,7 +818,7 @@ label RaquelInt:
 
             r "De Carlos y Lucas... Estaban en la piscina, parecía que estaban discutiendo..."
             r "Carlos parecía muy alterado..."
-            r "También escuché agua... Creo que alguien se cayó a la piscina... *llora*"
+            r "También escuché agua... Creo que alguien se cayó a la piscina..."
 
             d "¿Crees que Carlos podría hacer algo así?"
 
@@ -765,6 +837,7 @@ label RaquelInt:
 
             menu RaquelQ2:
                 "¿Hiciste algo? ¿Te acercaste a ellos?":
+                    show raquel sad
                     r "No... me seguí durmiendo... En su momento no le di importancia, ¿sabe?"
                     r "Pensé que simplemente estarían jugando..."
 
@@ -776,6 +849,8 @@ label RaquelInt:
 
             r "No lo recuerdo... Sería sobre la una, una y pico..."
 
+            show raquel neutral
+
             d "Muy bien."
 
             python: 
@@ -786,15 +861,18 @@ label RaquelInt:
 
         "¿Cómo era Lucas?" if raquelBranch3:
             r "Muy buena gente."
+            show raquel sad
             r "Se llevaba bien con todos. Era un chico educado..."
             r "Todavía no me creo que le haya pasado esto a él..."
+            show raquel neutral
             python:
                 raquelBranch3 = False
             jump RaquelIntMenu
 
         "¿Ocurrió algo esta mañana?" if raquelBranch4:
             r "Fui a la cocina a por algo para comer... Saqué algo de la despensa, me preparé un café y cuando fui a sentarme en la mesa, vi un cuerpo en flotando boca abajo en la piscina..."
-            r "Enseguida lo reconocí... *llora*"
+            r "Enseguida lo reconocí..."
+            show raquel sad
 
             d "Me estás ayudando mucho, continúa, por favor."
 
@@ -803,26 +881,31 @@ label RaquelInt:
             d "Y fue ahí cuándo gritaste, ¿no?"
 
             r "Sí..." 
+            show raquel neutral
             python:
                 raquelBranch4 = False
             jump RaquelIntMenu
 
         "Muchas gracias por todo.":
+            hide raquel with dissolve
             jump escenaDelCrimen
 
-
- 
 # ----------------- ----- ------ -----------------
 
 # ----------------- Inte. Joana -----------------
 
 label JoanaInt:
 
+    show joana neutral:
+        fromLeft
+
     if joanaBranch0:
 
         d "Buenos días. ¿Estás preparada para hablar de lo de anoche?"
 
-        j "Ha sido por mi culpa... Nada de esto hubiese ocurrido si yo no... *llora*"
+        show joana sad
+
+        j "Ha sido por mi culpa... Nada de esto hubiese ocurrido si yo no..."
 
         d "¿Qué pasó?"
 
@@ -832,7 +915,11 @@ label JoanaInt:
 
         j "Sí... hemos jugado ya varias veces y es realmente una tontería... pero el problema aquí es que me tocó darle un beso a Carlos..."
 
+        show joana neutral
+
         d "Continúa"
+
+        show joana angry
 
         j "El caso es que tampoco tendría que habérselo tomado tan mal, no es para tanto."
         j "Lucas sabía perfectamente que yo no sentía nada por Carlos, que le quería a él."
@@ -840,16 +927,19 @@ label JoanaInt:
         j "Hice lo que tenía que hacer y punto."
         j "No esperaba que fuese a sentarle tan mal..."
 
+        show joana neutral
         python:
             joanaBranch0 = False
 
     menu JoanaIntMenu:
         "Entonces, ¿Lucas y tú erais pareja?" if joanaBranch1:
+            show joana sad
             j "Por favor, no hables de él en pasado..."
 
             d "Lo siento."
 
             j "Da igual..."
+            show joana neutral
             j "Lucas y yo llevábamos un año juntos."
             j "Fuimos amigos durante mucho tiempo hasta que nos dimos cuenta de que nos gustábamos."
 
@@ -859,6 +949,7 @@ label JoanaInt:
 
         "¿Crees que Lucas pudo haberse suicidado por el beso?" if joanaBranch2:
             j "Creo que sí... si no, qué otra cosa podría ser..."
+            show joana sad
             j "Es todo por mi culpa..."
 
             d "Es importante que entiendas que nosotros no somos responsables de las emociones de los demás"
@@ -868,6 +959,7 @@ label JoanaInt:
             j "No..."
             j "Creía que todo estaba bien entre Lucas y Carlos..."
             j "Juraría que eran incluso mejores amigos..."
+            show joana neutral
             j "Y además, Lucas sabía perfectamente lo mucho que le quería y que no sentía nada por Carlos"
 
             python:
@@ -897,13 +989,16 @@ label JoanaInt:
             jump JoanaIntMenu
 
         "Tengo entendido que Lucas y tú discutisteis en el porche. ¿Es eso cierto?" if joanaBranch4:
+            show joana sad
             j "S-sí..."
             j "La verdad es que acabé levantando un poco la voz..."
             j "No tenía ningún sentido que se fuese a enfadar por eso"
+            show joana angry
             j "Ya no somos niños, ¿sabes?"
             j "Quizás si no hubiese sido tan bruta..."
             j "Si hubiese tenido un poco más de tacto con él..."
             j "Creo que tendría que haberme quedado dentro y dejar que otro saliese a buscarle... Solo empeoré las cosas..."
+            show joana neutral
 
             python:
                 joanaBranch4 = False
@@ -933,9 +1028,11 @@ label JoanaInt:
             d "¿Quizás Lucas pudo entender otra cosa?"
 
             j "No creo, la verdad."
+            show joana sad
             j "Pero ahora que lo dices... quizás sí..."
             j "Lucas es-"
             j "Era... bastante dramático"
+            show joana neutral
 
             python:
                 if carlosBranch5AlreadyFound == False:
@@ -987,6 +1084,7 @@ label JoanaInt:
             jump JoanaIntMenu
 
         "Terminar":
+            hide joana with dissolve
             jump escenaDelCrimen
 
 # ----------------- ----- ----- -----------------
