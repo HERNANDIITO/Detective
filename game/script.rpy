@@ -66,6 +66,10 @@ transform fromBottom:
     xalign 0.0 yalign 2.0
     linear 1 yalign 1.0
 
+transform fromCenterBottom:
+    xalign 0.5 yalign 2.0
+    linear 1 yalign 0.5
+
 transform toBottom:
     xalign 0.0 yalign 1.0
     linear 1 yalign 2.0
@@ -159,41 +163,55 @@ label start:
     menu fichas:
         "Joana":
             show file joana:
-                fromBottom
-            n "lorem ipsum"
-            hide joana with dissolve
+                fromCenterBottom
+
+            python:
+                renpy.pause(delay=None, modal=True)
+
+            hide file with dissolve
             jump fichas
 
         "Raquel":
             show file raquel:
-                fromBottom
-            n "lorem ipsum"
-            hide raquel with dissolve
+                fromCenterBottom
+            
+            python:
+                renpy.pause(delay=None, modal=True)
+
+            hide file with dissolve
             jump fichas
 
         "Eric":
             show file eric:
-                fromBottom
-            n "lorem ipsum"
-            hide eric with dissolve
+                fromCenterBottom
+            
+            python:
+                renpy.pause(delay=None, modal=True)
+
+            hide file with dissolve
             jump fichas
 
         "Carlos":
             show file carlos:
-                fromBottom
-            n "lorem ipsum"
-            hide carlos with dissolve
+                fromCenterBottom
+            
+            python:
+                renpy.pause(delay=None, modal=True)
+
+            hide file with dissolve
             jump fichas
 
         "Lucas":
             show file lucas:
-                fromBottom
-            n "lorem ipsum"
-            hide lucas with dissolve
+                fromCenterBottom
+            
+            python:
+                renpy.pause(delay=None, modal=True)
+
+            hide file with dissolve
             jump fichas
 
         "Viajar a la escena del crimen":
-            n "lorem ipsum definitivo"
             show bg raquel
             jump escenaDelCrimen
 
