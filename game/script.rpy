@@ -79,6 +79,7 @@ transform fadeOut:
 label start:
 
     scene black
+    play music "music/intro.mp3" fadein 1.0 loop
 
     n "Suena la alarma y te despiertas."
     n "Sales de entre las sábanas y te diriges al baño."
@@ -120,6 +121,8 @@ label start:
 
     show phone neutral:
         fromBottom
+    
+    play music "music/llamada.mp3" fadein 1.0 loop
 
     n "Repentinamente suena el movil."
 
@@ -145,6 +148,8 @@ label start:
 
     n "La llamada termina"
     hide phone with dissolve
+
+    play music "music/menu.mp3" fadein 1.0 loop
 
     n "Dejas el teléfono en la encimera, te preparas un café y te sientas delante del ordenador: efectivamente, ahí estaba el mensaje."
     show bg office with dissolve
@@ -189,6 +194,7 @@ label start:
 
         "Viajar a la escena del crimen":
             n "lorem ipsum definitivo"
+            show bg raquel
             jump escenaDelCrimen
 
     return
@@ -197,15 +203,19 @@ label start:
 
 menu escenaDelCrimen:
     "Interrogar a Joana":
+        show bg joana with dissolve
         jump JoanaInt
 
     "Interrogar a Raquel":
+        show bg raquel with dissolve
         jump RaquelInt
 
     "Interrogar a Eric":
+        show bg eric with dissolve
         jump EricInt
 
     "Interrogar a Carlos":
+        show bg carlos with dissolve
         jump CarlosInt
 
     "Cerrar el caso":
@@ -234,6 +244,7 @@ menu acusaciones:
 
     "Volver":
         n "lorem ipsum definitivo"
+        jump escenaDelCrimen
 
 # ----------------- ------ --- ------ ------------------
 
@@ -241,6 +252,7 @@ menu acusaciones:
 
 label CarlosInt:
 
+    play music "music/carlos.mp3" fadein 1.0 loop
     show carlos neutral:
         fromLeft
 
@@ -516,6 +528,7 @@ label CarlosInt:
 
 label EricInt:
 
+    play music "music/eric.mp3" fadein 1.0 loop
     show eric neutral:
         fromLeft
 
@@ -691,6 +704,7 @@ label EricInt:
 
 label RaquelInt:
 
+    play music "music/raquel.mp3" fadein 1.0 loop
     show raquel neutral:
         fromLeft
 
@@ -896,6 +910,7 @@ label RaquelInt:
 
 label JoanaInt:
 
+    play music "music/joana.mp3" fadein 1.0 loop
     show joana neutral:
         fromLeft
 
