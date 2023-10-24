@@ -6,3 +6,4 @@ errors.txt
 /game/saves/
 /game/*.rpyc
 *.rpyc
+*.png~
