@@ -83,7 +83,8 @@ transform fadeOut:
 label start:
 
     scene black
-    queue music "music/intro.mp3" fadein 1.0 loop
+    stop music fadeout 1.0
+    play music "music/intro.mp3" fadein 1.0 loop
 
     n "Suena la alarma y te despiertas."
     n "Sales de entre las sábanas y te diriges al baño."
@@ -126,7 +127,8 @@ label start:
     show phone neutral:
         fromBottom
     
-    queue music "music/llamada.mp3" fadein 1.0 loop
+    stop music fadeout 1.0
+    play music "music/llamada.mp3" fadein 1.0 loop
 
     n "Repentinamente suena el movil."
 
@@ -153,7 +155,8 @@ label start:
     n "La llamada termina"
     hide phone with dissolve
 
-    queue music "music/menu.mp3" fadein 1.0 loop
+    stop music fadeout 1.0
+    play music "music/menu.mp3" fadein 1.0 loop
 
     n "Dejas el teléfono en la encimera, te preparas un café y te sientas delante del ordenador: efectivamente, ahí estaba el mensaje."
     show bg office with dissolve
@@ -244,22 +247,18 @@ menu escenaDelCrimen:
 
 menu acusaciones:
     "Acusar a Joana":
-        n "lorem ipsum"
         jump JoanaEnd
 
     "Acusar a Raquel":
-        n "lorem ipsum"
         jump RaquelEnd
 
     "Acusar a Eric":
-        n "lorem ipsum"
         jump EricEnd
 
     "Acusar a Carlos":
         jump CarlosEnd
 
     "Volver":
-        n "lorem ipsum definitivo"
         jump escenaDelCrimen
 
 # ----------------- ------ --- ------ ------------------
@@ -268,7 +267,8 @@ menu acusaciones:
 
 label CarlosInt:
 
-    queue music "music/carlos.mp3" fadein 1.0 loop
+    stop music fadeout 1.0
+    play music "music/carlos.mp3" fadein 1.0 loop
     show carlos neutral:
         fromLeft
 
@@ -544,7 +544,8 @@ label CarlosInt:
 
 label EricInt:
 
-    queue music "music/eric.mp3" fadein 1.0 loop
+    stop music fadeout 1.0
+    play music "music/eric.mp3" fadein 1.0 loop
     show eric neutral:
         fromLeft
 
@@ -720,7 +721,8 @@ label EricInt:
 
 label RaquelInt:
 
-    queue music "music/raquel.mp3" fadein 1.0 loop
+    stop music fadeout 1.0
+    play music "music/raquel.mp3" fadein 1.0 loop
     show raquel neutral:
         fromLeft
 
@@ -926,7 +928,8 @@ label RaquelInt:
 
 label JoanaInt:
 
-    queue music "music/joana.mp3" fadein 1.0 loop
+    stop music fadeout 1.0
+    play music "music/joana.mp3" fadein 1.0 loop
     show joana neutral:
         fromLeft
 
@@ -1121,14 +1124,136 @@ label JoanaInt:
 # ----------------- ----- ----- -----------------
 
 label JoanaEnd:
+    show black with dissolve
 
+    show text "Dos semanas más tarde..."
+    pause 2 
+    hide text
+    hide black
+
+    show bg office with dissolve
+    show phone neutral:
+        fromBottom
+
+    a "Me acaban de llegar los resultados del juicio"
+
+    d "Y... ¿bien?"
+
+    a "Te di una oportunidad y la has desperdiciado..."
+    a "Sinceramente... creo que hasta aquí llega nuestra colaboración..."
+
+    d "..."
+
+    a "¿Cómo narices se te pasó por la cabeza que podría ser Joana?"
+    a "¿En qué estabas pensando?"
+
+    d "..."
+
+    a "Era imposbiles de atacar en el juicio, ¡si es que no ha hecho nada!"
+    a "Sinceramente, no pienso volver a llamarte para pedirte que resuelvas nada. Has terminado complicándolo todo mucho más."
+
+    n "Cuelga la llamada abruptamente"
+
+    show black with dissolve
+    pause 10
+
+    return
+
+label EricEnd:
+    show black with dissolve
+
+    show text "Dos semanas más tarde..."
+    pause 2 
+    hide text
+    hide black
+
+    show bg office with dissolve
+    show phone neutral:
+        fromBottom
     
-label EircEnd:
+    a "Tú, [nombre], el juicio ha ido viento en popa. Ese rufián yonki va a pasar un merecido tiempo entre rejas."
+    a "Y a ti te llamarán próximamente para ponerte al cargo de un caso nuevo. Enhorabuena."
 
+    d "Bueno, seguramente tampoco fue algo hecho a conciencia, espero que se haya tenido en cuenta..."
+
+    a "Así es, se ha tenido en cuenta, pero el consumo abusivo de drogas no lo ha dejado muy bien parado."
+
+    d "Pobre chaval..."
+
+    a "Sí, pero hoy estamos de celebración: acabas de remontar tu carrera como detective..."
+    a "...y todo gracias a mí o sea que cuelgo ya mismo y me invitas a unas copas."
+
+    n "Cuelga la llamada de manera rempentina"
+
+    show black with dissolve
+    pause 10
+
+    return
     
 label CarlosEnd:
+    show black with dissolve
 
+    show text "Dos semanas más tarde..."
+    pause 2 
+    hide text
+    hide black
+
+    show bg office with dissolve
+    show phone neutral:
+        fromBottom
     
+    a "Me acaban de llegar los resultados del juicio, han declarado a Carlos culpable."
+
+    c "Ufff, qué alegría, no te haces a la idea de lo tenso que estaba."
+
+    a "Ya… pues el tema es que he estado leyendo y revisando tu investigación y no me cuadra en absoluto…"
+    a "Creo que se han llevado al pobre chaval por sus antecedentes más que por este caso… Un poco injusto, la verdad."
+
+    c "..."
+
+    a "En fin, supongo que te volverán a llamar, aunque por un precio que no se si ha valido la pena pagar: un chavalín que es muy probable que no haya hecho nada va a pasarse los mejores años de la vida pudriéndose en una celda…"
+    a "Espero que por lo menos tuviese algo de culpa."
+
+    n "Cuelga abruptamente"
+    
+    show black with dissolve
+    pause 10
+
+    return
+
 label RaquelEnd:
+    show black with dissolve
 
-    
+    show text "Dos semanas más tarde..."
+    pause 2 
+    hide text
+    hide black
+
+    show bg office with dissolve
+    show phone neutral:
+        fromBottom
+
+
+    a "Me acaban de llegar los resultados del juicio"
+
+    d "Y... ¿bien?"
+
+    a "Te di una oportunidad y la has desperdiciado..."
+    a "Sinceramente... creo que hasta aquí llega nuestra colaboración..."
+
+    d "..."
+
+    a "¿Cómo narices se te pasó por la cabeza que podría ser Raquel?"
+    a "¿En qué estabas pensando?"
+
+    d "..."
+
+    a "Era imposbiles de atacar en el juicio, ¡si es que no ha hecho nada!"
+    a "Sinceramente, no pienso volver a llamarte para pedirte que resuelvas nada. Has terminado complicándolo todo mucho más."
+
+    n "Cuelga la llamada abruptamente"
+
+    show black with dissolve
+    pause 10
+
+    return
