@@ -220,46 +220,50 @@ label start:
     return
 
 # ----------------- Escena del crimen ------------------
+label escenaDelCrimen:
+    stop music fadeout 1.0
+    play music "music/menu.mp3" fadein 1.0 loop
+    menu escenaDelCrimenMenu:
+        "Interrogar a Joana":
+            show bg joana with dissolve
+            jump JoanaInt
 
-menu escenaDelCrimen:
-    "Interrogar a Joana":
-        show bg joana with dissolve
-        jump JoanaInt
+        "Interrogar a Raquel":
+            show bg raquel with dissolve
+            jump RaquelInt
 
-    "Interrogar a Raquel":
-        show bg raquel with dissolve
-        jump RaquelInt
+        "Interrogar a Eric":
+            show bg eric with dissolve
+            jump EricInt
 
-    "Interrogar a Eric":
-        show bg eric with dissolve
-        jump EricInt
+        "Interrogar a Carlos":
+            show bg carlos with dissolve
+            jump CarlosInt
 
-    "Interrogar a Carlos":
-        show bg carlos with dissolve
-        jump CarlosInt
-
-    "Cerrar el caso":
-        jump acusaciones
+        "Cerrar el caso":
+            jump acusaciones
 
 # ----------------- ------ --- ------ ------------------
 
 # ----------------- Escena del crimen ------------------
+label acusaciones:
+    stop music fadeout 1.0
+    play music "music/acusando.mp3" fadein 1.0 loop
+    menu acusacionesMenu:
+        "Acusar a Joana":
+            jump JoanaEnd
 
-menu acusaciones:
-    "Acusar a Joana":
-        jump JoanaEnd
+        "Acusar a Raquel":
+            jump RaquelEnd
 
-    "Acusar a Raquel":
-        jump RaquelEnd
+        "Acusar a Eric":
+            jump EricEnd
 
-    "Acusar a Eric":
-        jump EricEnd
+        "Acusar a Carlos":
+            jump CarlosEnd
 
-    "Acusar a Carlos":
-        jump CarlosEnd
-
-    "Volver":
-        jump escenaDelCrimen
+        "Volver":
+            jump escenaDelCrimen
 
 # ----------------- ------ --- ------ ------------------
 
