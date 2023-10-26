@@ -1,12 +1,15 @@
 ﻿# Personajes
 
-define a = Character("Aarón")
+define a = Character("Aarón", color="#ece256")
 define n = Character(what_italic = True)
 
-define j = Character("Joana")
-define r = Character("Raquel")
-define c = Character("Carlos")
-define e = Character("Eric")
+define j = Character("Joana",  color="#8a21bb")
+define r = Character("Raquel", color="#df4ad7")
+define c = Character("Carlos", color="#b33d2d")
+define e = Character("Eric",   color="#2ebb21")
+
+python:
+    renpy.play("menu_click.wav")
 
 # Branches
 
@@ -82,21 +85,29 @@ transform fadeOut:
 
 label start:
 
+    show black with dissolve
+
+    show text "Recomendamos papel y boli para tomar nota a lo largo de la aventura."
+    pause 10 
+    hide text
+
     scene black
     stop music fadeout 1.0
-    play music "music/intro.mp3" fadein 1.0 loop
+    play sound "alarm.wav" fadein 1.0
 
     n "Suena la alarma y te despiertas."
     n "Sales de entre las sábanas y te diriges al baño."
 
+    play music "house.wav" volume 0.025 loop
+
     scene bg bath with dissolve
 
-    n "¿Qué ves?"
 
     show d_fem flipped:
         toLeft
     show d_masc pose:
         toRight
+    n "¿Qué ves?"
 
     menu:
         "Chico":
@@ -118,17 +129,23 @@ label start:
         nombre = renpy.input("¿Cómo te llamabas?")
         nombre = nombre.strip() or "Noah"
 
-    define d = Character( name = "[nombre]", image = "[gen]" )
+    define d = Character( name = "[nombre]", image = "[gen]", who_xpos=9.0)
 
+    play sound "tap.wav" volume 0.25
+    pause 3.0
     n "Terminas de lavarte la cara y procedes a desayunar."
+    play sound "footsteps_1.wav" volume 0.25
+    pause 1.0
 
     show bg kitchen with dissolve
 
     show phone neutral:
         fromBottom
     
-    stop music fadeout 1.0
-    play music "music/llamada.mp3" fadein 1.0 loop
+    # stop music fadeout 1.0
+    # play music "music/llamada.mp3" fadein 1.0 loop
+
+    play sound "incoming_call.wav" volume 0.25
 
     n "Repentinamente suena el movil."
 
@@ -147,7 +164,7 @@ label start:
     a "Estamos completamente seguros de que el asesino es uno de las personas con las que residía ya que nadie se ha acercado a esa casa desde que ellos la alquilaron."
     a "Te he mandado por email toda la información disponible, ponte ya mismo a leer las fichas de los sospechosos y ve a la escena del crimen en cuanto estés listo."
     
-    d "Muchas gracias, tío. Te debo una."
+    d "Muchas gracias. Te debo una."
 
     a "Esto cuenta por bastante más que una, me estoy jugando el pellejo confiándote un caso después de que metieses la pata estrepitosamente con el anterior..."
     a "Pero bueno, hoy por ti, mañana por mí. Buena suerte."
@@ -155,15 +172,17 @@ label start:
     n "La llamada termina"
     hide phone with dissolve
 
-    stop music fadeout 1.0
-    play music "music/menu.mp3" fadein 1.0 loop
+    # stop music fadeout 1.0
+    # play music "music/menu.mp3" fadein 1.0 loop
 
-    n "Dejas el teléfono en la encimera, te preparas un café y te sientas delante del ordenador: efectivamente, ahí estaba el mensaje."
+    play sound "footsteps_1.wav" volume 0.25
     show bg office with dissolve
+    n "Dejas el teléfono en la encimera, te preparas un café y te sientas delante del ordenador: efectivamente, ahí estaba el mensaje."
     n "Lo abres y encuentras cinco fichas, los cuatro sospechosos y la víctima, además de la ubicación de la escena del crimen."
     
     menu fichas:
         "Joana":
+            play sound "file.wav"
             show file joana:
                 fromCenterBottom
 
@@ -174,6 +193,7 @@ label start:
             jump fichas
 
         "Raquel":
+            play sound "file.wav"
             show file raquel:
                 fromCenterBottom
             
@@ -184,6 +204,7 @@ label start:
             jump fichas
 
         "Eric":
+            play sound "file.wav"
             show file eric:
                 fromCenterBottom
             
@@ -194,6 +215,7 @@ label start:
             jump fichas
 
         "Carlos":
+            play sound "file.wav"
             show file carlos:
                 fromCenterBottom
             
@@ -204,6 +226,7 @@ label start:
             jump fichas
 
         "Lucas":
+            play sound "file.wav"
             show file lucas:
                 fromCenterBottom
             
@@ -214,6 +237,9 @@ label start:
             jump fichas
 
         "Viajar a la escena del crimen":
+            play sound "crime_scene.wav"
+            pause 2
+            stop sound fadeout 1.0
             show bg raquel with dissolve
             jump escenaDelCrimen
 
@@ -222,22 +248,26 @@ label start:
 # ----------------- Escena del crimen ------------------
 label escenaDelCrimen:
     stop music fadeout 1.0
-    play music "music/menu.mp3" fadein 1.0 loop
+    play music "crime_house.wav" volume 0.025 fadein 1.0 loop
     menu escenaDelCrimenMenu:
         "Interrogar a Joana":
             show bg joana with dissolve
+            play sound "footsteps_1.wav" volume 0.25
             jump JoanaInt
 
         "Interrogar a Raquel":
             show bg raquel with dissolve
+            play sound "footsteps_1.wav" volume 0.25
             jump RaquelInt
 
         "Interrogar a Eric":
             show bg eric with dissolve
+            play sound "footsteps_1.wav" volume 0.25
             jump EricInt
 
         "Interrogar a Carlos":
             show bg carlos with dissolve
+            play sound "footsteps_1.wav" volume 0.25
             jump CarlosInt
 
         "Cerrar el caso":
@@ -247,8 +277,8 @@ label escenaDelCrimen:
 
 # ----------------- Escena del crimen ------------------
 label acusaciones:
-    stop music fadeout 1.0
-    play music "music/acusando.mp3" fadein 1.0 loop
+    # stop music fadeout 1.0
+    # play music "music/acusando.mp3" fadein 1.0 loop
     menu acusacionesMenu:
         "Acusar a Joana":
             jump JoanaEnd
@@ -271,8 +301,8 @@ label acusaciones:
 
 label CarlosInt:
 
-    stop music fadeout 1.0
-    play music "music/carlos.mp3" fadein 1.0 loop
+    # stop music fadeout 1.0
+    # play music "music/carlos.mp3" fadein 1.0 loop
     show carlos neutral:
         fromLeft
 
@@ -305,12 +335,12 @@ label CarlosInt:
             c "perdió a su madre cuando tenía quince años y, al ser la mayor tuvo que cuidar de sus hermanos pequeños"
             c "Su padre entró en depresión tras el fallecimiento y ya nada fue igual en su casa"
             c "Está un poquillo loca, la verdad. No se qué hacían esos dos juntos."
-            c "Ahora, ¿su relación? Casi no se nada de ella. Lucas apenas se abría y no me creo nada de lo que dice Joana"
-            c "Creo que miente más que otra cosa" 
+            c "Ahora, ¿su relación? Casi no se nada de ella. Lucas apenas se abría y no me creo nada de lo que dice Joana."
+            c "Creo que miente más que otra cosa." 
             
             menu:
                 "Conoces demasiado bien la vida de Joana...":
-                    c "Nos llevábamos bien. Llegamos a estar bastante unidos"
+                    c "Nos llevábamos bien. Llegamos a estar bastante unidos."
 
                     d "¿Y ahora ya no?"
 
@@ -319,9 +349,9 @@ label CarlosInt:
 
                     d "¿Llegaste a tener sentimientos hacia ella?"
                     
-                    c "No veo cómo ese dato es relevante al caso"
+                    c "No veo cómo ese dato es relevante al caso."
 
-                    d "Todo es relevante"
+                    d "Todo es relevante."
 
                     c "No. No llegué a sentir nada por ella."
 
@@ -353,7 +383,7 @@ label CarlosInt:
             c "Después Joana se unió al grupo, cosa que no entiendo, mientras que Lucas se quedó solo un rato más antes de decirnos que se iba a dormir."
             c "No se tú, pero yo resolvería los problemas con mi pareja antes de volver al grupo y hacer como si nada..."
 
-            d "Continúa"
+            d "Continúa."
 
             c "Pues tampoco hay mucho más."
             c "Seguimos todos de charreta y pasándolo bien hasta que decidimos irnos a dormir."
@@ -361,8 +391,8 @@ label CarlosInt:
             c "Nadie le presionó ni hizo comentarios al respecto. Ya hablaría cuando estuviese preparado. "
 
             menu CarlosQ2:
-                "¿Y todos os fuisteis a dormir en ese momento?":
-                    c "Sí"
+                "¿Y os fuisteis todos a dormir en ese momento?":
+                    c "S.í"
 
                     d "¿Escuchaste algo raro esa noche?"
 
@@ -380,9 +410,9 @@ label CarlosInt:
             jump CarlosIntMenu
 
         "¿Sabes si alguien se llevaba mal con Lucas?" if carlosBranch3:
-            c "¿Te refieres a que si sé quiénl o ha podido matar?"
+            c "¿Te refieres a que si sé quién lo ha podido matar?"
             c "Pues no, no lo sé. Lucas se llevaba bien con todos."
-            c "No creo que nadie quisiera hacerle daño"
+            c "No creo que nadie quisiera hacerle daño."
 
             d "¿Crees que ha podido ser un accidente?"
 
@@ -409,7 +439,7 @@ label CarlosInt:
                 carlosBranch4  = False
             jump CarlosIntMenu
 
-        "¿Llegaste a tener algún vínculo romántico con Joana?" if carlosBranch5:
+        "¿Llegaste a tener algún vínculo romántico con Joana?" if (carlosBranch5 and (not carlosBranch1) and (not carlosBranch2) and (not carlosBranch3)):
             c "¿Quién te ha dicho eso?"
             show carlos angry at left
             c "Vaya panda de mentirosos que tengo por amigos, joder."
@@ -421,13 +451,13 @@ label CarlosInt:
                 carlosBranch5  = False
             jump CarlosIntMenu
 
-        "Me he enterado de que Joana y tú estuvisteis saliendo. ¿Por qué has mentido?" if carlosBranch5:
+        "Me he enterado de que Joana y tú estuvisteis saliendo. ¿Por qué has mentido?" if (carlosBranch5 and (not carlosBranch1) and (not carlosBranch2) and (not carlosBranch3)):
             c "Fue hace unos años. Nunca funcionó."
             python:
                 carlosBranch5  = False
             jump CarlosIntMenu
 
-        "¿Estuviste en la piscina por la noche?" if carlosBranch6:
+        "¿Estuviste en la piscina por la noche?" if (carlosBranch6 and (not carlosBranch1) and (not carlosBranch2) and (not carlosBranch3)):
             c "¿En la piscina?"
             c "Pero si yo me fui a dormir a la misma hora que todos."
             c "¿Por qué me quedaría yo solo en la piscina?"
@@ -457,7 +487,7 @@ label CarlosInt:
             show carlos neutral at left
             c "Pues le pregunté si estaba todo bien."
             c "Me comentó que había discutido con su querida novia y que además no podía dormir por lo que había salido a dar un paseo."
-            c "Yo, como buen mejor amigo, me ofercí a acompañarle."
+            c "Yo, como buen mejor amigo, me ofrecí a acompañarle."
 
             d "¿Sobre qué hora ocurrió esto?"
 
@@ -506,7 +536,7 @@ label CarlosInt:
                 ericBranch2 = True
             jump CarlosIntMenu
 
-        "¿Viste a Lucas durante la noche?" if carlosBranch6:
+        "¿Viste a Lucas durante la noche?" if (carlosBranch6 and (not carlosBranch1) and (not carlosBranch2) and (not carlosBranch3)):
             c "¿Por qué me preguntas esto?"
             c "¿En serio crees que he sido yo?"
             c "¿Su jodido mejor amigo?"
@@ -548,9 +578,9 @@ label CarlosInt:
 
 label EricInt:
 
-    stop music fadeout 1.0
-    play music "music/eric.mp3" fadein 1.0 loop
-    show eric neutral:
+    # stop music fadeout 1.0
+    # play music "music/eric.mp3" fadein 1.0 loop
+    show eric sleeping:
         fromLeft
 
     if ericBranch0:
@@ -558,7 +588,7 @@ label EricInt:
 
         e "Aaaaagh..."
 
-        d "Me gustaría hacerte unas preguntas"
+        d "Me gustaría hacerte unas preguntas."
 
         e "Hhmmm..."
 
@@ -575,8 +605,9 @@ label EricInt:
                 ericBranch1 = False
             jump EricIntMenu
 
-        "¿Estás mejor?" if ericBranch2:
+        "¿Estás mejor?" if (ericBranch2 and (not ericBranch1)):
             e "Sí... Más o menos..."
+            show eric high
 
             d "¿Estuviste anoche en la piscina?"
 
@@ -586,38 +617,58 @@ label EricInt:
 
             e "Hmm..."
 
+            show eric sleeping
+
             menu:
-                "¿Qué pasó en la piscina?, Eric":
+                "¿Qué pasó en la piscina, Eric? ":
                     e "Aaargh..."
                 
                 "Eric, concéntrate, tú puedes.":
+
                     e "Hmmm..."
                 
+            show eric high
             e "Se estaban gritando... y los separé..."
+            show eric sleeping
 
             menu:
                 "Esto es importante, necesito detalles, por favor.":
+                    show eric high
                     e "¿Por qué es importante...? ¿Tú quién eres...?"
                 
-                "Espabila, Eric, no tenemos todo el día":
+                "Espabila, Eric, no tenemos todo el día.":
+                    show eric high
                     e "Voy... voy..."
                 
+            
             e "Los separé... y me fui con Lucas... a la azotea..."
             e "Conseguí que se fumase uno, hehehe"
             e "Nunca lo había visto tan contento..."
 
+            show eric sleeping
+
             menu:
                 "¿Lo drogaste?":
-                    e "Hehehe... un poco solo... nada que pudiese matarlo..."
+                    show eric high
+                    e "Hehehe... solo un poco... nada que pudiese matarlo..."
                 
-                "Y qué pasó después":
+                "¿Y qué pasó después?":
+                    show eric high
                     e "Aaargh... no me acuerdo..."
+            
 
             d "Eric, dame un segundo."
 
             e "Si..."
+            show eric sleeping
+            hide eric with dissolve
+            show phone neutral:
+                fromBottom
 
+            play sound "phone_call.mp3"
             n "Haces una llamada a la Agencia"
+            pause 20
+            stop sound fadeout 1.0
 
             a "¿Sí?"
 
@@ -637,13 +688,19 @@ label EricInt:
 
             n "Terminas la llamada."
 
+            hide phone with dissolve
+
+            show eric high:
+                fromLeft
+
             python:
                 ericBranch2 = False
                 ericBranch4 = True
             jump EricIntMenu
         
-        "¿Estás mejor?" if ericBranch3:
+        "¿Podemos hablar un momento?" if (ericBranch3 and (not ericBranch1)):
             e "Sí... Más o menos..."
+            show eric high
 
             d "¿Ocurrió algo anoche?"
 
@@ -652,12 +709,15 @@ label EricInt:
             d "¿Te acuerdas de quienes eran?"
 
             e "Agh..."
+            show eric sleeping
            
             menu:
                 "Esto es importante, necesito detalles, por favor.":
+                    show eric high
                     e "¿Por qué es importante...? ¿Tú quién eres...?"
                 
                 "Espabila, Eric, no tenemos todo el día":
+                    show eric high
                     e "Voy... voy..."
 
             e "Eran Carlos y Lucas... se estaban gritando en la piscina..."
@@ -681,11 +741,14 @@ label EricInt:
             e "Me escondí... no me vió..."
             e "Y menos mal... sino me hubiese llevado a rastras a mi cuarto... hehehe..."
 
+            show eric sleeping
+
             python:
                 ericBranch3 = False
             jump EricIntMenu
 
-        "¿Dónde estuvisteis Lucas y tú fumando?" if ericBranch4:
+        "¿Dónde estuvisteis Lucas y tú fumando?" if (ericBranch4 and (not ericBranch1)):
+            show eric high
             e "Hmmm..."
             e "Aaargh..."
             e "A la azotea, creo..."
@@ -705,17 +768,18 @@ label EricInt:
 
             d "¿A dónde se fue Lucas?"
 
-            e "No lo se. Con su novia, seguramente..."
+            e "No lo sé. Con su novia, seguramente..."
 
             d "¿Y tú qué hiciste después?"
 
-            e "Beber... Necesitaba beber... me lo pedía el cuerpo..." 
+            e "Beber... Necesitaba beber... me lo pedía el cuerpo..."
+            show eric sleeping
             
             python:
                 ericBranch4 = False
             jump EricIntMenu
 
-        "Terminar":
+        "Terminar.":
             hide eric with dissolve
             jump escenaDelCrimen
 
@@ -725,8 +789,8 @@ label EricInt:
 
 label RaquelInt:
 
-    stop music fadeout 1.0
-    play music "music/raquel.mp3" fadein 1.0 loop
+    # stop music fadeout 1.0
+    # play music "music/raquel.mp3" fadein 1.0 loop
     show raquel neutral:
         fromLeft
 
@@ -735,20 +799,20 @@ label RaquelInt:
 
         d "¿Necesitas un pañuelo?"
 
-        r "No, no hace falta... Tengo pro aquí uno. Lo siento..."
+        r "No, no hace falta... Tengo por aquí uno. Lo siento..."
 
         d "No te preocupes."
 
         show raquel sad
         r "Es que... Esta mañana... yo... Nunca volveré a verle... está... se ha ido..."
 
-        d "Mira... sé que esto es complicado, pero necesito que hacerte unas preguntas... Sé que no te apetece recordarlo todo, pero debes hacerlo por Lucas. Piensa que a él le gustaría que averiguásemos qué pasó realmente."
+        d "Mira... sé que esto es complicado, pero necesito hacerte unas preguntas... Sé que no te apetece recordarlo todo, pero debes hacerlo por Lucas. Piensa que a él le gustaría que averiguásemos qué pasó realmente."
 
         r "Tiene razón..."
 
         d "No hace falta que me trates de usted, somos un equipo. Solo quiero saber la verdad y suponogo que tú también, ¿no?"
 
-        r "Sí. Sí quiero. Lucaas no se merece esto. Hay que averiguar qué ocurrió, porque... cómo alguien le... haya matado..."
+        r "Sí. Sí quiero. Lucas no se merece esto. Hay que averiguar qué ocurrió, porque... cómo alguien le... haya matado..."
         show raquel neutral
 
         d "Tranquila. Para eso estoy aquí. Para que se haga justicia. Si alguien hizo algo, lo descubriremos y pagará, ¿vale?"
@@ -772,7 +836,7 @@ label RaquelInt:
 
             show raquel neutral
 
-            r "No sé si sabes qué juego es: se gira un aboterlla y a la persona a la que apunte le haces hacer una cosa, bueno, hay muchas versiones del juego, pero nosotros jugamos a verdad o reto."
+            r "No sé si sabes qué juego es: se gira una botella y a la persona a la que apunte le haces hacer una cosa, bueno, hay muchas versiones del juego, pero nosotros jugamos a verdad o reto."
 
             d "Entiendo."
 
@@ -819,13 +883,13 @@ label RaquelInt:
             show raquel sad
             r "Al rato entró Joana a la habitación y se sentó de nuevo en su sitio con el resto. Parecía furiosa."
             r "Ella es del tipo de persona que no muestra mucho sus emociones, pero a pesar de todo eso se notaba que algo no había ido bien."
-            r "Al resto nos dio miedo sacar el tema,p or lo que hicimos como si nada hubiese pasado. Charlamos un rato y seguimos jugando"
+            r "Al resto nos dio miedo sacar el tema, por lo que hicimos como si nada hubiese pasado. Charlamos un rato y seguimos jugando."
 
             d "¿Y qué pasó después?"
 
-            show raquel netral
- 
-            r "Estuvimos algo de tiempo jugando y pasando el rato hasta que entró Lucas dicineod que se iba a dormir. Le dimos las buenas noches y subió."
+            show raquel neutral
+
+            r "Estuvimos algo de tiempo jugando y pasando el rato hasta que entró Lucas diciendo que se iba a dormir. Le dimos las buenas noches y subió."
             r "Parecía que estaba bien, pero algo cansado."
 
             d "¿Actuó de manera extraña?"
@@ -858,14 +922,14 @@ label RaquelInt:
 
             d "¿Crees que Carlos podría hacer algo así?"
 
-            r "No lo se..."
+            r "No lo sé..."
             r "Él... él nunca haría nada así..."
             r "Es verdad que a veces es algo... irascible... y se enfada y grita mucho..."
             r "Pero nos quiere a todos... quería mucho a Lucas..."
 
-            d "Tranquilizate. Respira..."
+            d "Tranquilízate. Respira..."
 
-            r "Lo siento"
+            r "Lo siento."
 
             d "No pasa nada. Ahora procede. ¿Qué oíste?"
 
@@ -932,8 +996,8 @@ label RaquelInt:
 
 label JoanaInt:
 
-    stop music fadeout 1.0
-    play music "music/joana.mp3" fadein 1.0 loop
+    # stop music fadeout 1.0
+    # play music "music/joana.mp3" fadein 1.0 loop
     show joana neutral:
         fromLeft
 
@@ -1026,7 +1090,7 @@ label JoanaInt:
                 joanaBranch3 = False
             jump JoanaIntMenu
 
-        "Tengo entendido que Lucas y tú discutisteis en el porche. ¿Es eso cierto?" if joanaBranch4:
+        "Tengo entendido que Lucas y tú discutisteis en el porche. ¿Es eso cierto?" if (joanaBranch4 and (not joanaBranch1) and (not joanaBranch2) and (not joanaBranch3)):
             show joana sad
             j "S-sí..."
             j "La verdad es que acabé levantando un poco la voz..."
@@ -1042,7 +1106,7 @@ label JoanaInt:
                 joanaBranch4 = False
             jump JoanaIntMenu
 
-        "¿Carlos y tú fuisteis pareja?" if joanaBranch5:
+        "¿Carlos y tú fuisteis pareja?" if (joanaBranch5 and (not joanaBranch1) and (not joanaBranch2) and (not joanaBranch3)):
             j "Supongo que te lo habrá contado alguien."
             j "Sí, estuvimos juntos unos cuatro meses."
             j "Me arrepiento enormemente, nunca llegó a funcionar. Fue un error."
@@ -1079,7 +1143,7 @@ label JoanaInt:
                 joanaBranch5 = False
             jump JoanaIntMenu
 
-        "¿Crees que Carlos podría estar involucrado en el presunto asesinato?" if joanaBranch6:
+        "¿Crees que Carlos podría estar involucrado en el presunto asesinato?" if (joanaBranch6 and (not joanaBranch1) and (not joanaBranch2) and (not joanaBranch3)):
             j "¿Carlos?"
 
             d "Sí"
@@ -1135,11 +1199,20 @@ label JoanaEnd:
     hide text
     hide black
 
+    stop music fadeout 1.0
+    play music "house.wav" volume 0.025 loop
+
     show bg office with dissolve
+    pause 5
     show phone neutral:
         fromBottom
+    
+    play sound "incoming_call.wav" volume 0.25
+    pause 1.0
+    n "Estás revisando las facturas cuando de repente comienza a sonar el móvil..."
+    stop sound fadeout 1.0
 
-    a "Me acaban de llegar los resultados del juicio"
+    a "Me acaban de llegar los resultados del juicio."
 
     d "Y... ¿bien?"
 
@@ -1156,7 +1229,7 @@ label JoanaEnd:
     a "Era imposbiles de atacar en el juicio, ¡si es que no ha hecho nada!"
     a "Sinceramente, no pienso volver a llamarte para pedirte que resuelvas nada. Has terminado complicándolo todo mucho más."
 
-    n "Cuelga la llamada abruptamente"
+    n "Cuelga la llamada abruptamente."
 
     show black with dissolve
     pause 10
@@ -1171,9 +1244,18 @@ label EricEnd:
     hide text
     hide black
 
+    stop music fadeout 1.0
+    play music "house.wav" volume 0.025 loop
+
     show bg office with dissolve
+    pause 5
     show phone neutral:
         fromBottom
+    
+    play sound "incoming_call.wav" volume 0.25
+    pause 1.0
+    n "Estás revisando las facturas cuando de repente comienza a sonar el móvil..."
+    stop sound fadeout 1.0
     
     a "Tú, [nombre], el juicio ha ido viento en popa. Ese rufián yonki va a pasar un merecido tiempo entre rejas."
     a "Y a ti te llamarán próximamente para ponerte al cargo de un caso nuevo. Enhorabuena."
@@ -1187,7 +1269,7 @@ label EricEnd:
     a "Sí, pero hoy estamos de celebración: acabas de remontar tu carrera como detective..."
     a "...y todo gracias a mí o sea que cuelgo ya mismo y me invitas a unas copas."
 
-    n "Cuelga la llamada de manera rempentina"
+    n "Cuelga la llamada de manera rempentina."
 
     show black with dissolve
     pause 10
@@ -1202,23 +1284,32 @@ label CarlosEnd:
     hide text
     hide black
 
+    stop music fadeout 1.0
+    play music "house.wav" volume 0.025 loop
+
     show bg office with dissolve
+    pause 5
     show phone neutral:
         fromBottom
+
+    play sound "incoming_call.wav" volume 0.25
+    pause 1.0
+    n "Estás revisando las facturas cuando de repente comienza a sonar el móvil..."
+    stop sound fadeout 1.0
     
     a "Me acaban de llegar los resultados del juicio, han declarado a Carlos culpable."
 
-    c "Ufff, qué alegría, no te haces a la idea de lo tenso que estaba."
+    d "Ufff, qué alegría, no te haces a la idea de lo tenso que estaba."
 
     a "Ya… pues el tema es que he estado leyendo y revisando tu investigación y no me cuadra en absoluto…"
     a "Creo que se han llevado al pobre chaval por sus antecedentes más que por este caso… Un poco injusto, la verdad."
 
-    c "..."
+    d "..."
 
     a "En fin, supongo que te volverán a llamar, aunque por un precio que no se si ha valido la pena pagar: un chavalín que es muy probable que no haya hecho nada va a pasarse los mejores años de la vida pudriéndose en una celda…"
     a "Espero que por lo menos tuviese algo de culpa."
 
-    n "Cuelga abruptamente"
+    n "Cuelga abruptamente."
     
     show black with dissolve
     pause 10
@@ -1233,12 +1324,20 @@ label RaquelEnd:
     hide text
     hide black
 
+    stop music fadeout 1.0
+    play music "house.wav" volume 0.025 loop
+
     show bg office with dissolve
+    pause 5
     show phone neutral:
         fromBottom
 
+    play sound "incoming_call.wav" volume 0.25
+    pause 1.0
+    n "Estás revisando las facturas cuando de repente comienza a sonar el móvil..."
+    stop sound fadeout 1.0
 
-    a "Me acaban de llegar los resultados del juicio"
+    a "Me acaban de llegar los resultados del juicio."
 
     d "Y... ¿bien?"
 
@@ -1255,7 +1354,7 @@ label RaquelEnd:
     a "Era imposbiles de atacar en el juicio, ¡si es que no ha hecho nada!"
     a "Sinceramente, no pienso volver a llamarte para pedirte que resuelvas nada. Has terminado complicándolo todo mucho más."
 
-    n "Cuelga la llamada abruptamente"
+    n "Cuelga la llamada abruptamente."
 
     show black with dissolve
     pause 10

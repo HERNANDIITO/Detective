@@ -226,6 +226,7 @@ style choice_vbox:
 
 style choice_button is default:
     properties gui.button_properties("choice_button")
+    activate_sound "menu_click.wav" #this should be the name of your sound effect and the file should be in the game folder
 
 style choice_button_text is default:
     properties gui.button_text_properties("choice_button")
