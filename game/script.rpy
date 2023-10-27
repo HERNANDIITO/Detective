@@ -162,14 +162,14 @@ label start:
     a "Y así debería de haber sido, pero tengo buenos contactos."
     a "Ahora escucha:\nha muerto un chaval en una casa de campo a las afueras, posiblemente ahogado, pero la autopsia todavía está en proceso."
     a "Estamos completamente seguros de que el asesino es uno de las personas con las que residía ya que nadie se ha acercado a esa casa desde que ellos la alquilaron."
-    a "Te he mandado por email toda la información disponible, ponte ya mismo a leer las fichas de los sospechosos y ve a la escena del crimen en cuanto estés listo."
+    a "Te he mandado por email toda la información disponible, ponte ya mismo a leer las fichas de los sospechosos y ve a la escena del crimen en cuanto hayas terminado."
     
     d "Muchas gracias. Te debo una."
 
     a "Esto cuenta por bastante más que una, me estoy jugando el pellejo confiándote un caso después de que metieses la pata estrepitosamente con el anterior..."
     a "Pero bueno, hoy por ti, mañana por mí. Buena suerte."
 
-    n "La llamada termina"
+    n "La llamada termina."
     hide phone with dissolve
 
     # stop music fadeout 1.0
@@ -332,8 +332,8 @@ label CarlosInt:
             d "Entiendo que él y Joana eran pareja. ¿Qué me podrías decir sobre eso?"
 
             c "Joana ha tenido varios problemas a lo largo de su vida:"
-            c "perdió a su madre cuando tenía quince años y, al ser la mayor tuvo que cuidar de sus hermanos pequeños"
-            c "Su padre entró en depresión tras el fallecimiento y ya nada fue igual en su casa"
+            c "perdió a su madre cuando tenía quince años y, al ser la mayor tuvo que cuidar de sus hermanos pequeños."
+            c "Su padre entró en depresión tras el fallecimiento y ya nada fue igual en su casa."
             c "Está un poquillo loca, la verdad. No se qué hacían esos dos juntos."
             c "Ahora, ¿su relación? Casi no se nada de ella. Lucas apenas se abría y no me creo nada de lo que dice Joana."
             c "Creo que miente más que otra cosa." 
@@ -386,7 +386,7 @@ label CarlosInt:
             d "Continúa."
 
             c "Pues tampoco hay mucho más."
-            c "Seguimos todos de charreta y pasándolo bien hasta que decidimos irnos a dormir."
+            c "Seguimos todos de hablando y pasándolo bien hasta que decidimos irnos a dormir."
             c "Bueno, y como dije antes, Lucas se fue a dormir antes que nosotros."
             c "Nadie le presionó ni hizo comentarios al respecto. Ya hablaría cuando estuviese preparado. "
 
@@ -819,7 +819,7 @@ label RaquelInt:
 
         r "Sí... empecemos..."
 
-        d "Perfecto"
+        d "Perfecto."
 
         python:
             raquelBranch0 = False
@@ -871,7 +871,7 @@ label RaquelInt:
                 "¿Qué le pareció ese reto a Joana? ¿Se quejó o algo?":
                     r "No. Se quedó seria, se levantó y lo cumplió. Después se volvió a su sitio, seguramente sin darle demasiada importancia, como hace con todo en esta vida."
             
-            d "Entiendo, continúa"
+            d "Entiendo, continúa."
 
             r "Pasó un rato y giramos la botella un par de veces más... hasta que Lucas se levantó y nos dijo que se iba a tomar el aire."
 
@@ -903,10 +903,10 @@ label RaquelInt:
             python:
                 raquelBranch1 = False
                 carlosBranch4 = True
-                raquelBranch4 = True
+                joanaBranch4 = True
             jump RaquelIntMenu
 
-        "Entiendo que fuiste tú quién encontró primero el cuerpo" if raquelBranch2:
+        "Entiendo que fuiste tú quién encontró primero el cuerpo." if raquelBranch2:
             r "Sí..."
 
             d "¿Ocurrió algo antes de que lo encontrases?"
@@ -970,7 +970,7 @@ label RaquelInt:
             jump RaquelIntMenu
 
         "¿Ocurrió algo esta mañana?" if raquelBranch4:
-            r "Fui a la cocina a por algo para comer... Saqué algo de la despensa, me preparé un café y cuando fui a sentarme en la mesa, vi un cuerpo en flotando boca abajo en la piscina..."
+            r "Fui a la cocina a por algo para comer... Saqué algo de la despensa, me preparé un café y cuando fui a sentarme en la mesa, vi un cuerpo flotando boca abajo en la piscina..."
             r "Enseguida lo reconocí..."
             show raquel sad
 
@@ -1019,7 +1019,7 @@ label JoanaInt:
 
         show joana neutral
 
-        d "Continúa"
+        d "Continúa."
 
         show joana angry
 
@@ -1054,7 +1054,7 @@ label JoanaInt:
             show joana sad
             j "Es todo por mi culpa..."
 
-            d "Es importante que entiendas que nosotros no somos responsables de las emociones de los demás"
+            d "Es importante que entiendas que nosotros no somos responsables de las emociones de los demás."
             d "Antes de darle el beso a Carlos: ¿pensaba que eso podría hacerle daño a Lucas?"
 
             j "..."
@@ -1062,7 +1062,7 @@ label JoanaInt:
             j "Creía que todo estaba bien entre Lucas y Carlos..."
             j "Juraría que eran incluso mejores amigos..."
             show joana neutral
-            j "Y además, Lucas sabía perfectamente lo mucho que le quería y que no sentía nada por Carlos"
+            j "Y además, Lucas sabía perfectamente lo mucho que le quería y que no sentía nada por Carlos."
 
             python:
                 joanaBranch2 = False
@@ -1077,9 +1077,9 @@ label JoanaInt:
             j "Sentado en el porche:"
             j "Tranquilo y sereno."
 
-            d "Continúa"
+            d "Continúa."
 
-            j "Me senté a su lado y le dije lo que ya sabía"
+            j "Me senté a su lado y le dije lo que ya sabía."
             j "Que le quería mucho y que no se preocupase por la tontería esta."
 
             d "¿Y qué dijo?"
@@ -1163,14 +1163,14 @@ label JoanaInt:
                     j "Pff..."
                     j "No pude dormir casi esa noche..."
                     j "Lucas se había enfadado tanto que no había venido ni a nuestra habitación..."
-                    j "Entonces estuve pensando cómo solucionarlo"
-                    j "y se me ocurrió que quizás sería buena idea que Carlos y Lucas hablasen..."
+                    j "Entonces estuve pensando cómo solucionarlo..."
+                    j "...y se me ocurrió que quizás sería buena idea que Carlos y Lucas hablasen..."
                     
                     d "Continúa."
 
                     j "Fui a la habitación de Carlos a buscarlo, pero no estaba."
                     j "Y al volver a la mía escuché a Eric y Lucas partirse de risa en la azotea..."
-                    j "Sinceramente, me alegré de que estuviese con alguien y de que además se lo estuviese pasando tan bien"
+                    j "Sinceramente, me alegré de que estuviese con alguien y de que además se lo estuviese pasando tan bien."
                     j "No se de qué narices se reirían pero no lo había escuchado reirse así nunca."
                     j "Supongo que gracias a esto mis preocupaciones se fueron y por fin pude pegar ojo."
 
@@ -1185,7 +1185,7 @@ label JoanaInt:
                 joanaBranch6 = False
             jump JoanaIntMenu
 
-        "Terminar":
+        "Terminar.":
             hide joana with dissolve
             jump escenaDelCrimen
 

@@ -13,7 +13,7 @@
 ##
 ## El _() que rodea la cadena de texto la señala como traducible.
 
-define config.name = _("Detective")
+define config.name = _("Woke up in midnight")
 
 
 ## Determina si el título dado más arriba se muestra en el menú principal.
@@ -37,7 +37,7 @@ define gui.about = _p("""
 ## Nombre breve del juego para ejecutables y directorios en la distribución.
 ## Debe contener solo carácteres ASCII, sin espacios, comas o puntos y coma.
 
-define build.name = "Detective"
+define build.name = "Woke up in midnight"
 
 
 ## Sonidos y música ############################################################
@@ -144,7 +144,7 @@ default preferences.afm_time = 15
 ## Normalmente, este valor no debe ser modificado. Si lo es, debe ser siempre
 ## una cadena literal y no una expresión.
 
-define config.save_directory = "Detective-1696232009"
+define config.save_directory = "Woke up in midnight-1696232009"
 
 
 ## Icono #######################################################################
