@@ -24,6 +24,7 @@ define carlosBranch5 = False
 define carlosBranch6 = False
 
 define carlosBranch5AlreadyFound = False
+define carlosBranch4AlreadyFound = False
 
 # --- Eric ---
 
@@ -133,7 +134,7 @@ label start:
 
     play sound "tap.wav" volume 0.25
     pause 3.0
-    n "Terminas de lavarte la cara y te vas a desayunar."
+    n "Terminas de lavarte la cara y vas a desayunar."
     play sound "footsteps_1.wav" volume 0.25
     pause 1.0
 
@@ -318,7 +319,7 @@ label CarlosInt:
 
         d "¿Estuviste presente cuando Raquel lo encontró?"
 
-        c "No, yo estaba en mi habitación. Estaba dormido. Me despertó su grito."
+        c "No, yo estaba en mi habitación. Durmiendo. Me despertó su grito."
 
         d "Y entonces acudiste a la cocina."
 
@@ -804,7 +805,7 @@ label RaquelInt:
 
     menu RaquelIntMenu: 
         "¿Qué ocurrió anoche?" if raquelBranch1:
-            r "Vale... a ver que piense... Estuvimos mucho rato charlando en la mesa que hay en la entrada de la casa, en el patio. Luego se nos ocurrió juegar al juego de la botella y para ello nos fuimos al salón de la casa."
+            r "Vale... a ver que piense... Estuvimos mucho rato charlando en la mesa que hay en la entrada de la casa, en el patio. Luego se nos ocurrió jugar al juego de la botella y para ello nos fuimos al salón de la casa."
             r "Si no hubiésemos jugado a ese juego..."
 
             show raquel sad
@@ -853,7 +854,7 @@ label RaquelInt:
             r "Sí, pero al rato se levantó Joana y fue tras él. Yo creo que fue a asegurarse de que Lucas estaba bien. Tardaron bastante en volver y se llegaron a oir gritos de una discusión."
 
             show raquel sad
-            r "Luego entró Joana a la habitación. Se sentó de nuevo en su sitio y no dijo nada. Al nosotros nos dio miedo sacar el tema, por lo que hicimos como si nada hubiese pasado. Charlamos un rato y seguimos jugando."
+            r "Luego entró Joana a la habitación. Se sentó de nuevo en su sitio y no dijo nada. A nosotros nos dio miedo sacar el tema, por lo que hicimos como si nada hubiese pasado. Charlamos un rato y seguimos jugando."
 
             d "¿Y qué pasó después?"
 
@@ -871,7 +872,9 @@ label RaquelInt:
             
             python:
                 raquelBranch1 = False
-                carlosBranch4 = True
+                if (not carlosBranch4) and (not carlosBranch4AlreadyFound):
+                    carlosBranch4 = True
+                    carlosBranch4AlreadyFound = True
                 joanaBranch4 = True
             jump RaquelIntMenu
 
@@ -994,6 +997,9 @@ label JoanaInt:
         show joana neutral
         python:
             joanaBranch0 = False
+            if (not carlosBranch4) and (not carlosBranch4AlreadyFound):
+                carlosBranch4AlreadyFound = True
+                carlosBranch4 = True
 
     menu JoanaIntMenu:
         "Entonces, ¿Lucas y tú erais pareja?" if joanaBranch1:
