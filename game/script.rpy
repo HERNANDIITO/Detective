@@ -236,7 +236,7 @@ label start:
                 renpy.pause(delay=None, modal=True)
 
             hide file with dissolve
-            jump fichase
+            jump fichas
 
         "Viajar a la escena del crimen":
             play sound "crime_scene.wav"
