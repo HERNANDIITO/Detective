@@ -37,7 +37,7 @@ define gui.about = _p("""
 ## Nombre breve del juego para ejecutables y directorios en la distribución.
 ## Debe contener solo carácteres ASCII, sin espacios, comas o puntos y coma.
 
-define build.name = "Woke up in midnight"
+define build.name = "WokeUpInMidnight"
 
 
 ## Sonidos y música ############################################################
@@ -210,4 +210,4 @@ init python:
 ## Los nombres de usuario y de proyecto asociados con un proyecto itch.io,
 ## separados por una barra.
 
-# define build.itch_project = "renpytom/test-project"
+define build.itch_project = "hernandiito.itch.io/woke-up-at-midnight"

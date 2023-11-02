@@ -107,7 +107,7 @@ label start:
         toLeft
     show d_masc pose:
         toRight
-    n "¿Qué ves?"
+    n "¿Qué ves reflejado en el espejo?"
 
     menu:
         "Chico":
@@ -133,7 +133,7 @@ label start:
 
     play sound "tap.wav" volume 0.25
     pause 3.0
-    n "Terminas de lavarte la cara y procedes a desayunar."
+    n "Terminas de lavarte la cara y te vas a desayunar."
     play sound "footsteps_1.wav" volume 0.25
     pause 1.0
 
@@ -147,7 +147,7 @@ label start:
 
     play sound "incoming_call.wav" volume 0.25
 
-    n "Repentinamente suena el movil."
+    n "De pronto, suena el móvil."
 
     d "¿Sí? ¿Quién es?"
 
@@ -157,11 +157,13 @@ label start:
 
     a "Vas a estar mejor, te traigo buenas noticias: tengo un caso para ti."
 
-    d "¿Qué? Pensaba que después del último iban a quitarme la placa..."
+    d "¿Qué? Pensaba que después del último caso iban a quitarme la placa..."
 
-    a "Y así debería de haber sido, pero tengo buenos contactos."
-    a "Ahora escucha:\nha muerto un chaval en una casa de campo a las afueras, posiblemente ahogado, pero la autopsia todavía está en proceso."
-    a "Estamos completamente seguros de que el asesino es uno de las personas con las que residía ya que nadie se ha acercado a esa casa desde que ellos la alquilaron."
+    a "Y así debería haber sido, pero tengo buenos contactos."
+    a "Ahora escucha: ha muerto un chaval en una casa de campo a las afueras, posiblemente ahogado, pero la autopsia todavía está en proceso." 
+    
+    a "Estamos completamente seguros de que el asesino es una de las personas con las que residía ya que nadie se ha acercado a esa casa desde que ellos la alquilaron." 
+    a "Sabemos que quien ha encontrado el cadáver se llama Raquel."
     a "Te he mandado por email toda la información disponible, ponte ya mismo a leer las fichas de los sospechosos y ve a la escena del crimen en cuanto hayas terminado."
     
     d "Muchas gracias. Te debo una."
@@ -225,7 +227,7 @@ label start:
             hide file with dissolve
             jump fichas
 
-        "Lucas":
+        "Lucas (víctima)":
             play sound "file.wav"
             show file lucas:
                 fromCenterBottom
@@ -234,7 +236,7 @@ label start:
                 renpy.pause(delay=None, modal=True)
 
             hide file with dissolve
-            jump fichas
+            jump fichase
 
         "Viajar a la escena del crimen":
             play sound "crime_scene.wav"
@@ -250,6 +252,12 @@ label escenaDelCrimen:
     stop music fadeout 1.0
     play music "crime_house.wav" volume 0.025 fadein 1.0 loop
     menu escenaDelCrimenMenu:
+
+        "Interrogar a Carlos":
+            show bg carlos with dissolve
+            play sound "footsteps_1.wav" volume 0.25
+            jump CarlosInt
+
         "Interrogar a Joana":
             show bg joana with dissolve
             play sound "footsteps_1.wav" volume 0.25
@@ -265,11 +273,6 @@ label escenaDelCrimen:
             play sound "footsteps_1.wav" volume 0.25
             jump EricInt
 
-        "Interrogar a Carlos":
-            show bg carlos with dissolve
-            play sound "footsteps_1.wav" volume 0.25
-            jump CarlosInt
-
         "Cerrar el caso":
             jump acusaciones
 
@@ -280,6 +283,10 @@ label acusaciones:
     # stop music fadeout 1.0
     # play music "music/acusando.mp3" fadein 1.0 loop
     menu acusacionesMenu:
+
+        "Acusar a Carlos":
+            jump CarlosEnd
+
         "Acusar a Joana":
             jump JoanaEnd
 
@@ -288,9 +295,6 @@ label acusaciones:
 
         "Acusar a Eric":
             jump EricEnd
-
-        "Acusar a Carlos":
-            jump CarlosEnd
 
         "Volver":
             jump escenaDelCrimen
@@ -331,12 +335,9 @@ label CarlosInt:
 
             d "Entiendo que él y Joana eran pareja. ¿Qué me podrías decir sobre eso?"
 
-            c "Joana ha tenido varios problemas a lo largo de su vida:"
-            c "perdió a su madre cuando tenía quince años y, al ser la mayor tuvo que cuidar de sus hermanos pequeños."
+            c "Joana ha tenido varios problemas a lo largo de su vida: perdió a su madre cuando tenía quince años y, al ser la mayor, tuvo que cuidar de sus hermanos pequeños."
             c "Su padre entró en depresión tras el fallecimiento y ya nada fue igual en su casa."
-            c "Está un poquillo loca, la verdad. No se qué hacían esos dos juntos."
-            c "Ahora, ¿su relación? Casi no se nada de ella. Lucas apenas se abría y no me creo nada de lo que dice Joana."
-            c "Creo que miente más que otra cosa." 
+            c "Está un poquillo loca, la verdad... No sé qué hacían esos dos juntos... Ahora, ¿su relación? Casi no sé nada de ella. Lucas apenas se abría y no me creo nada de lo que dice Joana. Creo que miente más que otra cosa."
             
             menu:
                 "Conoces demasiado bien la vida de Joana...":
@@ -344,10 +345,9 @@ label CarlosInt:
 
                     d "¿Y ahora ya no?"
 
-                    c "Las cosas han cambiado desde la muerte de su madre."
-                    c "Ya nunca fue la misma."
+                    c "Las cosas han cambiado desde la muerte de su madre. Ya nunca fue la misma."
 
-                    d "¿Llegaste a tener sentimientos hacia ella?"
+                    d "¿Llegaste a sentir algo por ella?"
                     
                     c "No veo cómo ese dato es relevante al caso."
 
@@ -356,21 +356,16 @@ label CarlosInt:
                     c "No. No llegué a sentir nada por ella."
 
                 "Casi no has hablado de Lucas...": 
-                    c "No hay mucho de qué hablar. Era buena gente, un santo diría yo."
-                    c "No todo el mundo sería capaz de soportar a Joana."
-                    c "En resumidas cuentas: se llevaba bien con todo el mundo."
+                    c "No hay mucho de qué hablar. Era buena gente, se llevaba bien con todo el mundo."
                     c "Nadie le haría daño a no ser que se la tuviesen bien guardada."
 
                     d "¿Qué insinuas?"
 
-                    c "Como he dicho antes, Joana nunca fue igual desde la pérdida de su madre."
-                    c "Su mente no funciona muy bien."
-                    c "A veces cuenta cosas que no han pasado y nos intenta convencer de que sí."
-                    c "Lo dicho, un poco loca..."
+                    c "Como he dicho antes, Joana nunca fue igual desde la pérdida de su madre. Su mente no funciona muy bien: a veces cuenta cosas que no han pasado y nos intenta convencer de que sí."
 
-                    d "¿Crees que ella podría haber hecho algo así?"
+                    d "¿Crees que podría haberle matado ella?"
 
-                    c "Eh, yo no he dicho nada de eso. Pero descubrirlo es parte de tu trabajo. "
+                    c "Eh, yo no he dicho nada de eso. Descubrirlo es parte de tu trabajo. "
                     
             python:
                 carlosBranch1 = False
@@ -379,20 +374,16 @@ label CarlosInt:
         "Cuéntame con todo lujo de detalles lo que ocurrió anoche." if carlosBranch2:
             c "Pues a ver..."
             c "Estábamos jugando juegos de mesa y pasando un buen rato, cuando de repente Lucas se mosqueó por una tontería. Al rato fue Joana a hablar con él."
-            c "No sabemos de qué hablaron pero se les escuchó discutor."
-            c "Después Joana se unió al grupo, cosa que no entiendo, mientras que Lucas se quedó solo un rato más antes de decirnos que se iba a dormir."
-            c "No se tú, pero yo resolvería los problemas con mi pareja antes de volver al grupo y hacer como si nada..."
+            c "No sabemos de qué hablaron pero se les oyó discutir."
+            c "Después, Joana se unió al grupo, cosa que no entiendo, mientras que Lucas se quedó solo un rato más antes de decirnos que se iba a dormir."
 
             d "Continúa."
 
-            c "Pues tampoco hay mucho más."
-            c "Seguimos todos de hablando y pasándolo bien hasta que decidimos irnos a dormir."
-            c "Bueno, y como dije antes, Lucas se fue a dormir antes que nosotros."
-            c "Nadie le presionó ni hizo comentarios al respecto. Ya hablaría cuando estuviese preparado. "
+            c "Pues tampoco hay mucho más. Seguimos todos hablando y pasándolo bien hasta que decidimos irnos a dormir."
 
             menu CarlosQ2:
                 "¿Y os fuisteis todos a dormir en ese momento?":
-                    c "S.í"
+                    c "Sí."
 
                     d "¿Escuchaste algo raro esa noche?"
 
@@ -411,8 +402,7 @@ label CarlosInt:
 
         "¿Sabes si alguien se llevaba mal con Lucas?" if carlosBranch3:
             c "¿Te refieres a que si sé quién lo ha podido matar?"
-            c "Pues no, no lo sé. Lucas se llevaba bien con todos."
-            c "No creo que nadie quisiera hacerle daño."
+            c "Pues no, no lo sé. Lucas se llevaba bien con todos. No creo que nadie quisiera hacerle daño."
 
             d "¿Crees que ha podido ser un accidente?"
 
@@ -428,13 +418,11 @@ label CarlosInt:
         "¿Por qué se molestó Lucas mientras jugábais?" if carlosBranch4:
             c "Nada, una tontería. Como bien has dicho: sólo estábamos jugando."
 
-            d "¿Seguro que no hubo un beso involucrado?"
-            d "¿Uno que pudiese molestar a nuestra víctima?"
+            d "¿Seguro que no hubo un beso involucrado que pudiese molestar a nuestra víctima?"
 
             c "¿Un beso?"
-            c "Ojalá. Ni si quiera se le puede llamar un beso a eso."
-            c "Un reto que puso el subnormal de Eric"
-            c "Un reto que seguramente haya olvidado porque seguro que va completamente fumado."
+            c "Ojalá. Ni si quiera se le puede llamar un beso a eso. Un reto que puso el subnormal de Eric. Un reto que seguramente haya olvidado porque seguro que va completamente fumado."
+
             python:
                 carlosBranch4  = False
             jump CarlosIntMenu
@@ -442,7 +430,7 @@ label CarlosInt:
         "¿Llegaste a tener algún vínculo romántico con Joana?" if (carlosBranch5 and (not carlosBranch1) and (not carlosBranch2) and (not carlosBranch3)):
             c "¿Quién te ha dicho eso?"
             show carlos angry at left
-            c "Vaya panda de mentirosos que tengo por amigos, joder."
+            c "Vaya panda de mentirosos que tengo por amigos."
 
             d "¿Entonces lo niegas?"
 
@@ -459,22 +447,16 @@ label CarlosInt:
 
         "¿Estuviste en la piscina por la noche?" if (carlosBranch6 and (not carlosBranch1) and (not carlosBranch2) and (not carlosBranch3)):
             c "¿En la piscina?"
-            c "Pero si yo me fui a dormir a la misma hora que todos."
-            c "¿Por qué me quedaría yo solo en la piscina?"
-            c "¿Crees que soy yo el asesino?"
-            c "¿Crees que asesinaría yo a alguien?"
-            c "¿A mi mejor amigo?"
+            c "Pero si yo me fui a dormir a la misma hora que todos. ¿Por qué me quedaría yo solo en la piscina? ¿Crees que soy yo el asesino?"
 
             d "Alguien te escuchó hablar con Lucas por la noche."
             d "En la piscina."
 
-            c "Joder."
+            c "..."
 
             d "Habla."
 
-            c "Me desperté en mitad de la noche..."
-            c "No me podía dormir y me cansé de dar vueltas en la cama, por lo que salí al porche a tomar el aire."
-            c "Y al rato apareció Lucas."
+            c "Me desperté en mitad de la noche... No me podía dormir y me cansé de dar vueltas en la cama, por lo que salí al porche a tomar el aire y al rato apareció Lucas."
 
             menu:
                 "Por favor, continúa.":
@@ -482,11 +464,10 @@ label CarlosInt:
 
                 "Termina la historia. Dudo que quedase ahí":
                     show carlos angry at left
-                    c "Voy, voy... Joder, cómo estamos..."
+                    c "Voy, voy..."
             
             show carlos neutral at left
-            c "Pues le pregunté si estaba todo bien."
-            c "Me comentó que había discutido con su querida novia y que además no podía dormir por lo que había salido a dar un paseo."
+            c "Pues le pregunté si estaba todo bien. Me comentó que había discutido con su querida novia y que además no podía dormir por lo que había salido a dar un paseo."
             c "Yo, como buen mejor amigo, me ofrecí a acompañarle."
 
             d "¿Sobre qué hora ocurrió esto?"
@@ -495,8 +476,8 @@ label CarlosInt:
 
             d "Está bien, continúa."
 
-            c "Dimos una vuelta a la parcela, estuvimos hablando simplemente. Nada relevante, hablar por hablar."
-            c "A la vuelta nos sentamos en el borde de la piscina a seguir hablando."
+            c "Dimos una vuelta a la parcela, estuvimos hablando simplemente. Nada relevante, hablar por hablar. A la vuelta nos sentamos en el borde de la piscina a seguir hablando."
+
 
             d "¿Ocurrió algo en la piscina?"
 
@@ -523,10 +504,7 @@ label CarlosInt:
 
             d "¿Y tú qué hiciste después?"
 
-            c "Me fui a dar un paseo."
-            c "Estaba cabreadísimo, pero cuando volví se me había pasado y me fui directo a la cama."
-            c "Me dormí rapidísimo."
-            c "Enfadarse cansa."
+            c "Me fui a dar un paseo. Estaba cabreadísimo, pero cuando volví se me había pasado y me fui directo a la cama."
 
             d "¿Cuándo llegaste a casa después de tu paseo?"
 
@@ -537,21 +515,19 @@ label CarlosInt:
             jump CarlosIntMenu
 
         "¿Viste a Lucas durante la noche?" if (carlosBranch6 and (not carlosBranch1) and (not carlosBranch2) and (not carlosBranch3)):
-            c "¿Por qué me preguntas esto?"
-            c "¿En serio crees que he sido yo?"
-            c "¿Su jodido mejor amigo?"
+            c "¿Por qué me preguntas esto? ¿En serio crees que he sido yo? ¿Su mejor amigo?"
+ 
             show carlos angry at left
             c "Pff... llévame preso si tan seguro estás."
 
             d "Tengo información que te hace el principal sospechoso ahora mismo."
 
-            c "Pues sí. Sí que lo vi."
-            c "No podía dormir anoche, por lo que salí a tomar el aire y al rato apareció él."
+            c "Pues sí. Sí que lo vi. No podía dormir anoche, por lo que salí a tomar el aire y al rato apareció él."
 
             d "¿Sobre qué hora fue esto?"
 
             c "Yo qué sé."
-            c "Lo único de lo que estoy seguro es de que yo ya estaba en la cama a las cuatro"
+            c "Lo único de lo que estoy seguro es de que yo ya estaba en la cama a las cuatro."
             show carlos neutral at left
 
             d "¿Puedo saber de qué hablásteis?"
@@ -561,8 +537,8 @@ label CarlosInt:
 
             d "¿Y en ningún momento pasásteis por la piscina?"
 
-            c "Qué va. Hacía frío a esas horas."
-            c "No se cómo acabó muerto allí. Pero por mi culpa no fue."
+            c "Qué va. Hacía frío a esas horas. No sé cómo acabó muerto allí. Pero por mi culpa no fue."
+           
             python:
                 carlosBranch6 = False
                 ericBranch3 = True
@@ -584,7 +560,7 @@ label EricInt:
         fromLeft
 
     if ericBranch0:
-        d "Buenas días. ¿Eric verdad?"
+        d "Buenos días. ¿Eric verdad?"
 
         e "Aaaaagh..."
 
@@ -600,6 +576,8 @@ label EricInt:
     menu EricIntMenu:
         "¿Eric?" if ericBranch1:
             e "Aargh... "
+            e "Cuidado Lucas... Te vas a caer..."
+            d "¿Qué has dicho?"
             e "Déjame en paz..."
             python:
                 ericBranch1 = False
@@ -677,12 +655,12 @@ label EricInt:
 
             a "Tenemos pocos datos, de momento."
             a "Parece ser que tiene un par de costillas rotas y que terminó de morir ahogado."
-            a "No se cómo acabaría así el chiquillo pero tuvo que sufrir cosa mala."
+            a "No sé cómo acabaría así el chiquillo pero tuvo que sufrir cosa mala."
 
             d "¿Se han encontrado restos de estupefacientes en la sangre?"
             d "Marihuana, concretamente."
 
-            a "Justo. Perdona. No se cómo he pasado eso por alto."
+            a "Justo. Perdona. No sé cómo he pasado eso por alto."
 
             d "Perfecto. Muchas gracias."
 
@@ -739,7 +717,7 @@ label EricInt:
 
             e "Me pareció ver entrar a Carlos... Entró a la casa... mientras yo asaltaba la bodega... hehehe..."
             e "Me escondí... no me vió..."
-            e "Y menos mal... sino me hubiese llevado a rastras a mi cuarto... hehehe..."
+            e "Y menos mal... sino me hubiese llevado a rastras a mi cuarto..."
 
             show eric sleeping
 
@@ -751,7 +729,7 @@ label EricInt:
             show eric high
             e "Hmmm..."
             e "Aaargh..."
-            e "A la azotea, creo..."
+            e "A la azotea, mirando cómo un mapache bebía de la piscina, creo..."
 
             menu:
                 "¿Supiste algo más de Carlos en toda la noche?":
@@ -826,8 +804,7 @@ label RaquelInt:
 
     menu RaquelIntMenu: 
         "¿Qué ocurrió anoche?" if raquelBranch1:
-            r "Vale... a ver que piense... Estuvimos mucho rato charlando en la mesa que hay en la entrada de la casa, en el patio."
-            r "Luego se nos ocurrió juegar al juego de la botella y para ello nos fuimos al salón de la casa, allí gira bien la botella en el suelo."
+            r "Vale... a ver que piense... Estuvimos mucho rato charlando en la mesa que hay en la entrada de la casa, en el patio. Luego se nos ocurrió juegar al juego de la botella y para ello nos fuimos al salón de la casa."
             r "Si no hubiésemos jugado a ese juego..."
 
             show raquel sad
@@ -836,24 +813,21 @@ label RaquelInt:
 
             show raquel neutral
 
-            r "No sé si sabes qué juego es: se gira una botella y a la persona a la que apunte le haces hacer una cosa, bueno, hay muchas versiones del juego, pero nosotros jugamos a verdad o reto."
+            r "No sé si sabes qué juego es: se gira una botella y a la persona a la que apunte le haces hacer una cosa. Nosotros jugamos a verdad o reto."
 
             d "Entiendo."
 
-            r "Eric giró la botella, que apuntó a Joana y ésta eligió reto."
-            r "Y el tonto de Eirc le dijo que le diese un beso a Carlos, y Joana se lo dio."
-            r "Fue un pico, nada más."
+            r "Eric giró la botella, que apuntó a Joana y ésta eligió reto. El tonto de Eric le dijo que le diese un beso a Carlos, y Joana se lo dio. Fue un pico, nada más."
 
             menu RaquelQ1:
                 "¿Cómo reaccionó Lucas?":
-                    r "No le gustó. Obviamente, sabía que era un juego estúpido y que no significaba nada..."
+                    r "No le gustó."
                     show raquel sad
 
                     d "¿Qué ocurre?"
 
-                    r "Carlos y Joana estuvieron saliendo hace unos años. Al final se dieron cuenta de que no funcionaba y que sería mejor quedar como amigos. Pero Lucas seguía sin aceptar eso."
-                    r "A día de hoy sigue... seguía... manteniendo un cierto recelo hacia Carlos."
-                    r "Aún así, eran muy buenos amigos y sabía que Joana ya no sentía nada por él."
+                    r "Carlos y Joana estuvieron saliendo hace unos años. Al final no funcionó y decidieron quedar como amigos, pero Lucas seguía sin aceptar eso. A día de hoy sigue... seguía... manteniendo un cierto recelo hacia Carlos."
+                   
                     show raquel neutral
 
                     python:
@@ -865,32 +839,27 @@ label RaquelInt:
 
 
                 "¿Por qué Eric le pondría ese reto a Joana?":
-                    r "Así es Eric. Yo creo que a veces no sabe ni lo que hace."
-                    r "Seguramente ya ni se acordaba de que hubo algo entre Carlos y Joana y tan solo quisiera que Luis se picase un poco."
+                    r "Así es Eric. Yo creo que a veces no sabe ni lo que hace. Seguramente ya ni se acordaba de que hubo algo entre Carlos y Joana."
 
                 "¿Qué le pareció ese reto a Joana? ¿Se quejó o algo?":
                     r "No. Se quedó seria, se levantó y lo cumplió. Después se volvió a su sitio, seguramente sin darle demasiada importancia, como hace con todo en esta vida."
             
             d "Entiendo, continúa."
 
-            r "Pasó un rato y giramos la botella un par de veces más... hasta que Lucas se levantó y nos dijo que se iba a tomar el aire."
+            r "Giramos la botella un par de veces más... hasta que Lucas se levantó y nos dijo que se iba a tomar el aire."
 
             d "¿Y seguisteis jugando todos?"
 
-            r "Sí, pero al rato se levantó Joana y fue tras él."
-            r "Yo creo que fue a asegurarse de que Lucas estaba bien."
-            r "Tardaron bastante en volver y se escucharon gritos de una discusión."
+            r "Sí, pero al rato se levantó Joana y fue tras él. Yo creo que fue a asegurarse de que Lucas estaba bien. Tardaron bastante en volver y se llegaron a oir gritos de una discusión."
+
             show raquel sad
-            r "Al rato entró Joana a la habitación y se sentó de nuevo en su sitio con el resto. Parecía furiosa."
-            r "Ella es del tipo de persona que no muestra mucho sus emociones, pero a pesar de todo eso se notaba que algo no había ido bien."
-            r "Al resto nos dio miedo sacar el tema, por lo que hicimos como si nada hubiese pasado. Charlamos un rato y seguimos jugando."
+            r "Luego entró Joana a la habitación. Se sentó de nuevo en su sitio y no dijo nada. Al nosotros nos dio miedo sacar el tema, por lo que hicimos como si nada hubiese pasado. Charlamos un rato y seguimos jugando."
 
             d "¿Y qué pasó después?"
 
             show raquel neutral
 
-            r "Estuvimos algo de tiempo jugando y pasando el rato hasta que entró Lucas diciendo que se iba a dormir. Le dimos las buenas noches y subió."
-            r "Parecía que estaba bien, pero algo cansado."
+            r "Pasado el rato entró Lucas diciendo que se iba a dormir. Le dimos las buenas noches y subió a su cuarto."
 
             d "¿Actuó de manera extraña?"
 
@@ -898,7 +867,7 @@ label RaquelInt:
 
             d "¿Ocurrió algo más después de eso?"
 
-            r "No, nos quedamos media horilla más... después cada uno subió a su cuarto a dormir. "
+            r "No, nos quedamos un poco más y después cada uno subió a su cuarto a dormir. "
             
             python:
                 raquelBranch1 = False
@@ -911,21 +880,16 @@ label RaquelInt:
 
             d "¿Ocurrió algo antes de que lo encontrases?"
 
-            r "Por la noche... me despertaron... al principio eran murullos..."
-            r "Pero luego pude distinguir las voces..."
+            r "Por la noche... me despertaron... al principio eran murmullos... luego pude distinguir las voces..."
 
             d "¿Qué ocurre, Raquel? ¿De quién eran las voces?"
 
             r "De Carlos y Lucas... Estaban en la piscina, parecía que estaban discutiendo..."
-            r "Carlos parecía muy alterado..."
-            r "También escuché agua... Creo que alguien se cayó a la piscina..."
+            r "Carlos parecía muy alterado... También oí agua... Creo que alguien se cayó a la piscina..."
 
             d "¿Crees que Carlos podría hacer algo así?"
 
-            r "No lo sé..."
-            r "Él... él nunca haría nada así..."
-            r "Es verdad que a veces es algo... irascible... y se enfada y grita mucho..."
-            r "Pero nos quiere a todos... quería mucho a Lucas..."
+            r "No lo sé... Él... él nunca haría nada así... Es verdad que a veces se enfada y grita mucho, pero nos quiere a todos..."
 
             d "Tranquilízate. Respira..."
 
@@ -933,17 +897,15 @@ label RaquelInt:
 
             d "No pasa nada. Ahora procede. ¿Qué oíste?"
 
-            r "A Carlos y Lucas. Estaban en la piscina, no se qué decían pero por el tono de voz sé que Carlos estaba enfadado. Y escuché agua y más gritos."
+            r "A Carlos y Lucas. Estaban en la piscina, no sé qué decían pero por el tono de voz sé que Carlos estaba enfadado."
 
             menu RaquelQ2:
                 "¿Hiciste algo? ¿Te acercaste a ellos?":
                     show raquel sad
-                    r "No... me seguí durmiendo... En su momento no le di importancia, ¿sabe?"
-                    r "Pensé que simplemente estarían jugando..."
+                    r "No... me seguí durmiendo... En su momento no le di importancia, ¿sabe? Pensé que simplemente estarían jugando..."
 
                 "¿Esto se lo has contado a alguien más?":
-                    r "No... Nadie más lo sabe..."
-                    r "O por lo menos yo no lo he contado..."
+                    r "No... Nadie más lo sabe... O por lo menos yo no lo he contado..."
 
             d "¿Sobre qué hora fue esto?"
 
@@ -962,16 +924,16 @@ label RaquelInt:
         "¿Cómo era Lucas?" if raquelBranch3:
             r "Muy buena gente."
             show raquel sad
-            r "Se llevaba bien con todos. Era un chico educado..."
-            r "Todavía no me creo que le haya pasado esto a él..."
+            r "Se llevaba bien con todos. Era un chico educado... Todavía no me creo que le haya pasado esto a él..."
+        
             show raquel neutral
             python:
                 raquelBranch3 = False
             jump RaquelIntMenu
 
         "¿Ocurrió algo esta mañana?" if raquelBranch4:
-            r "Fui a la cocina a por algo para comer... Saqué algo de la despensa, me preparé un café y cuando fui a sentarme en la mesa, vi un cuerpo flotando boca abajo en la piscina..."
-            r "Enseguida lo reconocí..."
+            r "Fui a la cocina a por algo para comer... Saqué algo de la despensa, me preparé un café y cuando fui a sentarme en la mesa, vi un cuerpo flotando boca abajo en la piscina... Enseguida lo reconocí..."
+
             show raquel sad
 
             d "Me estás ayudando mucho, continúa, por favor."
@@ -1011,23 +973,23 @@ label JoanaInt:
 
         d "¿Qué pasó?"
 
-        j "Hice algo que no debería haber hecho... Pero tampoco esperaba que fuese a molestarle tanto... Era solo un juego..."
+        j "Hice algo que no debería haber hecho... Pero tampoco esperaba que fuese a molestarle tanto a Lucas... Era solo un juego..."
 
         d "¿Jugásteis a un juego?"
 
-        j "Sí... hemos jugado ya varias veces y es realmente una tontería... pero el problema aquí es que me tocó darle un beso a Carlos..."
-
-        show joana neutral
+        j "Sí... hemos jugado ya varias veces y es realmente una tontería..." 
 
         d "Continúa."
+        
+        j "Me tocó darle un beso a Carlos..."
+       
+        show joana neutral
+
+        d "Entiendo."
 
         show joana angry
 
-        j "El caso es que tampoco tendría que habérselo tomado tan mal, no es para tanto."
-        j "Lucas sabía perfectamente que yo no sentía nada por Carlos, que le quería a él."
-        j "Además, me habían puesto ese reto, ¿qué iba a hacer yo?"
-        j "Hice lo que tenía que hacer y punto."
-        j "No esperaba que fuese a sentarle tan mal..."
+        j "El caso es que tampoco tendría que habérselo tomado tan mal Lucas, no era para tanto. ¿Qué iba a hacer yo? Hice lo que tenía que hacer y punto."
 
         show joana neutral
         python:
@@ -1043,44 +1005,36 @@ label JoanaInt:
             j "Da igual..."
             show joana neutral
             j "Lucas y yo llevábamos un año juntos."
-            j "Fuimos amigos durante mucho tiempo hasta que nos dimos cuenta de que nos gustábamos."
 
             python:
                 joanaBranch1 = False
             jump JoanaIntMenu
 
         "¿Crees que Lucas pudo haberse suicidado por el beso?" if joanaBranch2:
-            j "Creo que sí... si no, qué otra cosa podría ser..."
+            j "Creo que sí... si no, ¿qué otra cosa podría ser?\nEs todo por mi culpa..."
             show joana sad
-            j "Es todo por mi culpa..."
 
-            d "Es importante que entiendas que nosotros no somos responsables de las emociones de los demás."
-            d "Antes de darle el beso a Carlos: ¿pensaba que eso podría hacerle daño a Lucas?"
+            d "Es importante que entiendas que nosotros no somos responsables de las emociones de los demás. Cuando te pusieron el reto, ¿llegaste a pensar que le podría molestar a Lucas?"
 
             j "..."
             j "No..."
-            j "Creía que todo estaba bien entre Lucas y Carlos..."
-            j "Juraría que eran incluso mejores amigos..."
+            j "Creía que todo estaba bien entre Carlos y Lucas... Juraría que eran incluso mejores amigos..."
             show joana neutral
-            j "Y además, Lucas sabía perfectamente lo mucho que le quería y que no sentía nada por Carlos."
 
             python:
                 joanaBranch2 = False
             jump JoanaIntMenu
 
-        "¿Qué ocurrió después?" if joanaBranch3:
-            j "Al rato Lucas salió fuera, a tomar el aire."
-            j "Ahí entendí que le molestó algo, por lo que le di un poco de tiempo y después salí a verle."
+        "¿Qué ocurrió después de ese reto?" if joanaBranch3:
+            j "Al rato Lucas salió fuera a tomar el aire. Le di un poco de tiempo y después salí a verle."
 
             d "Y ¿cómo estaba?"
 
-            j "Sentado en el porche:"
-            j "Tranquilo y sereno."
+            j "Sentado en el porche, tranquilo."
 
             d "Continúa."
 
-            j "Me senté a su lado y le dije lo que ya sabía."
-            j "Que le quería mucho y que no se preocupase por la tontería esta."
+            j "Me senté a su lado y le dije lo que ya sabía: que le quería mucho y que no se preocupase por la tontería esa."
 
             d "¿Y qué dijo?"
 
@@ -1092,13 +1046,10 @@ label JoanaInt:
 
         "Tengo entendido que Lucas y tú discutisteis en el porche. ¿Es eso cierto?" if (joanaBranch4 and (not joanaBranch1) and (not joanaBranch2) and (not joanaBranch3)):
             show joana sad
-            j "S-sí..."
+            j "S... sí..."
             j "La verdad es que acabé levantando un poco la voz..."
-            j "No tenía ningún sentido que se fuese a enfadar por eso"
+
             show joana angry
-            j "Ya no somos niños, ¿sabes?"
-            j "Quizás si no hubiese sido tan bruta..."
-            j "Si hubiese tenido un poco más de tacto con él..."
             j "Creo que tendría que haberme quedado dentro y dejar que otro saliese a buscarle... Solo empeoré las cosas..."
             show joana neutral
 
@@ -1107,9 +1058,7 @@ label JoanaInt:
             jump JoanaIntMenu
 
         "¿Carlos y tú fuisteis pareja?" if (joanaBranch5 and (not joanaBranch1) and (not joanaBranch2) and (not joanaBranch3)):
-            j "Supongo que te lo habrá contado alguien."
-            j "Sí, estuvimos juntos unos cuatro meses."
-            j "Me arrepiento enormemente, nunca llegó a funcionar. Fue un error."
+            j "Supongo que te lo habrá contado alguien... Sí, estuvimos juntos unos meses y me arrepiento, nunca llegó a funcionar."
             
             d "¿Cuándo ocurrió todo esto?"
 
@@ -1119,21 +1068,6 @@ label JoanaInt:
 
             j "Claro."
 
-            d "¿Sabes si Carlos siente algo por ti a día de hoy?"
-
-            j "Hmm..."
-            j "No creo. Me sorprendería mucho."
-            j "Sí que es cierto que Carlos se lo echó en cara a Lucas cuando empezamos a salir."
-            j "Le dijo el típico comentario fuera de lugar: 'Me la has robado, eh'..."
-            j "Dudo que fuese en serio o que le estuviese echando algo en cara."
-
-            d "¿Quizás Lucas pudo entender otra cosa?"
-
-            j "No creo, la verdad."
-            show joana sad
-            j "Pero ahora que lo dices... quizás sí..."
-            j "Lucas es-"
-            j "Era... bastante dramático"
             show joana neutral
 
             python:
@@ -1146,7 +1080,7 @@ label JoanaInt:
         "¿Crees que Carlos podría estar involucrado en el presunto asesinato?" if (joanaBranch6 and (not joanaBranch1) and (not joanaBranch2) and (not joanaBranch3)):
             j "¿Carlos?"
 
-            d "Sí"
+            d "Sí."
 
             j "¿Crees que Carlos lo ha matado?"
 
@@ -1154,29 +1088,28 @@ label JoanaInt:
 
             j "No, la verdad es que no."
 
-            d "¿Y no escuchaste nada por la noche?"
+            d "¿Y no oíste nada por la noche?"
 
             j "No..."
 
             menu joanaQ6:
                 "¿Seguro?":
-                    j "Pff..."
-                    j "No pude dormir casi esa noche..."
-                    j "Lucas se había enfadado tanto que no había venido ni a nuestra habitación..."
-                    j "Entonces estuve pensando cómo solucionarlo..."
-                    j "...y se me ocurrió que quizás sería buena idea que Carlos y Lucas hablasen..."
+                    j "Bueno..."
+
+                    d "¿Qué ocurre?"
+                    j "Se me ocurrió que quizás sería buena idea que Carlos hablase con Lucas... así que... fui a la habitación de Carlos a buscarlo... pero no estaba."
                     
-                    d "Continúa."
+                    d "Continúa, por favor."
 
-                    j "Fui a la habitación de Carlos a buscarlo, pero no estaba."
-                    j "Y al volver a la mía escuché a Eric y Lucas partirse de risa en la azotea..."
-                    j "Sinceramente, me alegré de que estuviese con alguien y de que además se lo estuviese pasando tan bien."
-                    j "No se de qué narices se reirían pero no lo había escuchado reirse así nunca."
-                    j "Supongo que gracias a esto mis preocupaciones se fueron y por fin pude pegar ojo."
+                    j "Al volver a mi habitación oí a Eric y Lucas riéndose. Estaban en la azotea."
 
-                    d "¿Sabrías decirme sobre qué hora fue esto?"
+                    d "¿Sabrías decirme sobre qué hora les oíste?"
 
                     j "Sobre las tres, creo."
+
+                    d "¿Y qué hiciste?"
+
+                    j "Nada. Me fui a mi cuarto y me dormí."
 
                 "Me da la sensación de que ocultas algo...":
                     j "No. En absoluto. Simplemente estoy cansada."
@@ -1226,7 +1159,7 @@ label JoanaEnd:
 
     d "..."
 
-    a "Era imposbiles de atacar en el juicio, ¡si es que no ha hecho nada!"
+    a "Era imposible de atacar en el juicio, ¡si es que no ha hecho nada!"
     a "Sinceramente, no pienso volver a llamarte para pedirte que resuelvas nada. Has terminado complicándolo todo mucho más."
 
     n "Cuelga la llamada abruptamente."
@@ -1306,7 +1239,7 @@ label CarlosEnd:
 
     d "..."
 
-    a "En fin, supongo que te volverán a llamar, aunque por un precio que no se si ha valido la pena pagar: un chavalín que es muy probable que no haya hecho nada va a pasarse los mejores años de la vida pudriéndose en una celda…"
+    a "En fin, supongo que te volverán a llamar, aunque por un precio que no sé si ha valido la pena pagar: un chavalín que es muy probable que no haya hecho nada va a pasarse los mejores años de la vida pudriéndose en una celda…"
     a "Espero que por lo menos tuviese algo de culpa."
 
     n "Cuelga abruptamente."
