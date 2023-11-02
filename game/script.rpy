@@ -746,7 +746,7 @@ label EricInt:
 
             d "¿A dónde se fue Lucas?"
 
-            e "No lo sé. Con su novia, seguramente..."
+            e "Creo que bajó de un salto a la piscina para quitarse el olor a humo..."
 
             d "¿Y tú qué hiciste después?"
 
