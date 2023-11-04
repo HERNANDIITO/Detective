@@ -1290,7 +1290,7 @@ label RaquelEnd:
 
     d "..."
 
-    a "Era imposbiles de atacar en el juicio, ¡si es que no ha hecho nada!"
+    a "Era imposible de atacar en el juicio, ¡si es que no ha hecho nada!"
     a "Sinceramente, no pienso volver a llamarte para pedirte que resuelvas nada. Has terminado complicándolo todo mucho más."
 
     n "Cuelga la llamada abruptamente."
